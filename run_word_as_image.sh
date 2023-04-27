@@ -7,13 +7,13 @@ WANDB_USER="none"
 
 EXPERIMENT=conformal_0.5_dist_pixel_100_kernel201
 
-CONCEPT=BUNNY
-WORD=BUNNY
-fonts=(KaushanScript-Regular)
+CONCEPT="WALL-E"
+WORD="WALL-E"
+fonts=(Quicksand)
 for j in "${fonts[@]}"
 do
-    letter_=("Y")
-    SEED=0
+    letter_=("W")
+    SEED=1
     for i in "${letter_[@]}"
     do
         echo "$i"
@@ -22,4 +22,3 @@ do
         CUDA_VISIBLE_DEVICES=0 python code/main.py $ARGS --semantic_concept "${CONCEPT}" --word "${WORD}"
     done
 done
-

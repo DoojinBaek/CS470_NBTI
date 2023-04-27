@@ -11,6 +11,7 @@ from utils import (
     update)
 import wandb
 import warnings
+import time
 warnings.filterwarnings("ignore")
 
 
@@ -43,7 +44,6 @@ def parse_args():
     if " " in cfg.word:
       raise ValueError(f'no spaces are allowed')
     cfg.caption = f"a {args.semantic_concept}. {args.prompt_suffix}"
-    cfg.log_dir = f"{args.log_dir}/{args.experiment}_{cfg.word}"
     if args.optimized_letter in cfg.word:
         cfg.optimized_letter = args.optimized_letter
     else:
@@ -54,6 +54,7 @@ def parse_args():
     cfg.wandb_user = args.wandb_user
     cfg.letter = f"{args.font}_{args.optimized_letter}_scaled"
     cfg.target = f"code/data/init/{cfg.letter}"
+    cfg.log_dir = f"{args.log_dir}/{int(time.time())}.word-{cfg.word}_sem-{cfg.semantic_concept}_letter-{cfg.optimized_letter}_seed-{cfg.seed}_font-{cfg.font}"
 
     return cfg
 
@@ -79,8 +80,7 @@ def set_config():
 
     # set experiment dir
     signature = f"{cfg.letter}_concept_{cfg.semantic_concept}_seed_{cfg.seed}"
-    cfg.experiment_dir = \
-        osp.join(cfg.log_dir, cfg.font, signature)
+    cfg.experiment_dir = cfg.log_dir
     configfile = osp.join(cfg.experiment_dir, 'config.yaml')
     print('Config:', cfg)
 

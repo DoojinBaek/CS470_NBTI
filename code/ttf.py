@@ -251,7 +251,7 @@ if __name__ == '__main__':
     for f in fonts:
         print(f"======= {f} =======")
         font_path = f"data/fonts/{f}.ttf"
-        output_path = f"data/init"
+        output_path = f"data/output/init"
         txt = "BUNNY"
         subdivision_thresh = None
         font_string_to_svgs(output_path, font_path, txt, target_control=target_cp,

@@ -146,7 +146,7 @@ class ConformalLoss:
 
     def reset(self):
         points = torch.cat([point.clone().detach() for point in self.parameters.point])
-        self.angles = self.get_angles(points)
+        self.angles = self.get_angles(points.to('cuda'))
 
     def init_faces(self, device: torch.device) -> torch.tensor:
         faces_ = []
@@ -168,7 +168,7 @@ class ConformalLoss:
     def __call__(self) -> torch.Tensor:
         loss_angles = 0
         points = torch.cat(self.parameters.point)
-        angles = self.get_angles(points)
+        angles = self.get_angles(points.to('cuda'))
         for i in range(len(self.faces)):
             loss_angles += (nnf.mse_loss(angles[i], self.angles[i]))
         return loss_angles

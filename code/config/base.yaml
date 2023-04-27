@@ -41,6 +41,6 @@ conformal_0.5_dist_pixel_100_kernel201:
       pixel_dist_sigma: 30
     conformal:
       use_conformal_loss: true
-      angeles_w: 0.5
+      angeles_w: 0.1
 
 
