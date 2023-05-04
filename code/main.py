@@ -16,7 +16,8 @@ from utils import (
     preprocess,
     learning_rate_decay,
     combine_word,
-    create_video)
+    create_video,
+    encoder_train_image_gen)
 import wandb
 import warnings
 warnings.filterwarnings("ignore")
@@ -51,6 +52,7 @@ if __name__ == "__main__":
     device = pydiffvg.get_device()
 
     print("preprocessing")
+    encoder_train_image_gen(cfg.render_size, cfg.render_size)
     preprocess(cfg.font, cfg.word, cfg.optimized_letter, cfg.level_of_cc)
 
     if cfg.loss.use_sds_loss:
