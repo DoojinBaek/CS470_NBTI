@@ -10,6 +10,7 @@ from ttf import font_string_to_svgs, normalize_letter_size
 import torch
 import numpy as np
 from typing import Final
+import glob
 
 font_list: Final = ("Bell-MT", "DeliusUnicase-Regular", "HobeauxRococeaux-Sherman", "IndieFlower-Regular"
                     ,"JosefinSans-Light", "KaushanScript-Regular", "LuckiestGuy-Regular", "Noteworthy-Bold", "Quicksand", "Saira-Regular")
@@ -248,3 +249,9 @@ def encoder_train_image_gen(w, h):
             letter_to_png(font_path, font, letter)
         for letter in range_char('a', 'z'):
             letter_to_png(font_path, font, letter)
+    fileList = glob.glob("code/data/letter_classifier/**/*.svg", recursive=True)
+    for filePath in fileList:
+        try:
+            os.remove(filePath)
+        except OSError:
+            print("Failed to remove: ", filePath)
