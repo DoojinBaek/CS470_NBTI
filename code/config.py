@@ -30,6 +30,7 @@ def parse_args():
     parser.add_argument('--batch_size', type=int, default=1)
     parser.add_argument('--use_wandb', type=int, default=0)
     parser.add_argument('--wandb_user', type=str, default="none")
+    parser.add_argument('--gen_data', type=bool, default=False, help="generate default data for letter encoder")
 
     cfg = edict()
     args = parser.parse_args()
@@ -55,7 +56,7 @@ def parse_args():
     cfg.letter = f"{args.font}_{args.optimized_letter}_scaled"
     cfg.target = f"code/data/init/{cfg.letter}"
     cfg.log_dir = f"{args.log_dir}/{int(time.time())}.word-{cfg.word}_sem-{cfg.semantic_concept}_letter-{cfg.optimized_letter}_seed-{cfg.seed}_font-{cfg.font}"
-
+    cfg.gen_data = args.gen_data
     return cfg
 
 

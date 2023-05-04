@@ -247,4 +247,4 @@ def encoder_train_image_gen(w, h):
         for letter in range_char('A', 'Z'):
             letter_to_png(font_path, font, letter)
         for letter in range_char('a', 'z'):
-            letter_to_png(font_path, font, letter):
+            letter_to_png(font_path, font, letter)
