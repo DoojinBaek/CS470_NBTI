@@ -213,30 +213,35 @@ class Classifier_CNN(torch.nn.Module):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
             torch.nn.Conv2d(1, 16, kernel_size=4, stride=2, padding=1),
+            torch.nn.BatchNorm2d(16),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer2 = torch.nn.Sequential(
             torch.nn.Conv2d(16, 32, kernel_size=4, stride=2, padding=1),
+            torch.nn.BatchNorm2d(32),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer3 = torch.nn.Sequential(
             torch.nn.Conv2d(32, 64, kernel_size=2, stride=2, padding=1),
+            torch.nn.BatchNorm2d(64),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer4 = torch.nn.Sequential(
             torch.nn.Conv2d(64, 128, kernel_size=2, stride=2, padding=1),
+            torch.nn.BatchNorm2d(128),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer5 = torch.nn.Sequential(
             torch.nn.Linear(512, 128, bias=False),
+            torch.nn.BatchNorm1d(128),
             torch.nn.ReLU(),
             torch.nn.Linear(128, 52, bias=False)
         )
