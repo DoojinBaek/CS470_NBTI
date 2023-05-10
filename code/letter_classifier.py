@@ -212,31 +212,33 @@ class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.Conv2d(1, 10, kernel_size=3, stride=3, padding=1),
+            torch.nn.Conv2d(1, 16, kernel_size=4, stride=2, padding=1),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer2 = torch.nn.Sequential(
-            torch.nn.Conv2d(10, 20, kernel_size=3, stride=3, padding=1),
+            torch.nn.Conv2d(16, 32, kernel_size=4, stride=2, padding=1),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer3 = torch.nn.Sequential(
-            torch.nn.Conv2d(20, 32, kernel_size=2, stride=2, padding=1),
+            torch.nn.Conv2d(32, 64, kernel_size=2, stride=2, padding=1),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer4 = torch.nn.Sequential(
-            torch.nn.Conv2d(32, 52, kernel_size=2, stride=2, padding=1),
+            torch.nn.Conv2d(64, 128, kernel_size=2, stride=2, padding=1),
             torch.nn.ReLU(),
             torch.nn.Dropout(0.1),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer5 = torch.nn.Sequential(
-            torch.nn.Linear(52, 52, bias=False)
+            torch.nn.Linear(512, 128, bias=False),
+            torch.nn.ReLU(),
+            torch.nn.Linear(128, 52, bias=False)
         )
     
     def forward(self, x):
