@@ -71,7 +71,8 @@ def create_datasets(batch_size):
     transforms.Normalize([0.89839834], [0.28976783])  #  정규화(normalization)
 ])
     test_transform = transforms.Compose([   # 나중에 test 데이터 불러올 때 참고하세요. 
-    transforms.ToTensor(), # 이 과정에서 [0, 255]의 범위를 갖는 값들을 [0.0, 1.0]으로 정규화 
+    transforms.ToTensor(), # 이 과정에서 [0, 255]의 범위를 갖는 값들을 [0.0, 1.0]으로 정규화
+    transforms.Resize((32, 32)),
     transforms.Grayscale(1),
     transforms.Normalize([0.89839834], [0.28976783])  # 테스트 데이터로 계산을 진행해서 따로 지정해주어도 좋습니다
 ])
@@ -126,24 +127,28 @@ class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.MaxPool2d(kernel_size=10, stride=10),
+            torch.nn.MaxPool2d(22, 22, 8),
             torch.nn.Conv2d(1, 6, 2),
             torch.nn.BatchNorm2d(6),
             torch.nn.ReLU(),
             torch.nn.MaxPool2d(2),
             torch.nn.Conv2d(6, 12, 2),
-            torch.nn.BatchNorm2d(12)
+            torch.nn.BatchNorm2d(12),
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(12, 24, 2),
+            torch.nn.BatchNorm2d(24),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(2),
         )
         self.layer2 = torch.nn.Sequential(
-            torch.nn.Linear(9408, 512),
+            torch.nn.Linear(600, 256),
             torch.nn.ReLU(),
-            torch.nn.Linear(512, 128),
+            torch.nn.Linear(256, 128),
             torch.nn.ReLU(),
             torch.nn.Linear(128, 52)
         )
     
     def forward(self, x):
-
         x = self.layer1(x)
         x = x.reshape(x.shape[0], -1)
         out = self.layer2(x)
