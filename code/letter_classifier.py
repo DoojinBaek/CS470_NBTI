@@ -1,9 +1,8 @@
+#%%
 import os
 import time
 import torch
 import numpy as np
-import pandas as pd
-import torch.nn.functional as F
 
 
 import os
@@ -23,11 +22,11 @@ import sys
 exp_idx = sys.argv[1]
 
 if len(sys.argv) != 2:
-    print("Insufficient arguments")
-    sys.exit()
-
+    exp_idx = 999
 
 ########## helper functions ##########
+def invert(image):
+    return transforms.functional.invert(image)
 def cal_acc(pred, label):
     '''
     pred: batch_size x 52 with probabilities
@@ -62,24 +61,17 @@ def calculate_val_loss_and_acc(model, loss_fn, dataloader):
 data_dir = "./"
 
 def create_datasets(batch_size):
-    
+
     train_transform = transforms.Compose([
     transforms.Grayscale(1),
     transforms.RandomRotation([-30, 30], fill=255),
-    transforms.RandomPerspective(distortion_scale=0.8, p=0.7, fill=255),
-    transforms.ToTensor(),  # 이 과정에서 [0, 255]의 범위를 갖는 값들을 [0.0, 1.0]으로 정규화, torch.FloatTensor로 변환
-    transforms.Normalize([0.89839834], [0.28976783])  #  정규화(normalization)
-])
-    test_transform = transforms.Compose([   # 나중에 test 데이터 불러올 때 참고하세요. 
-    transforms.ToTensor(), # 이 과정에서 [0, 255]의 범위를 갖는 값들을 [0.0, 1.0]으로 정규화
-    transforms.Resize((32, 32)),
-    transforms.Grayscale(1),
-    transforms.Normalize([0.89839834], [0.28976783])  # 테스트 데이터로 계산을 진행해서 따로 지정해주어도 좋습니다
+    transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=255),
+    transforms.Lambda(invert),
+    transforms.ToTensor()
 ])
 
     # choose the training and test datasets
     train_data = datasets.ImageFolder(os.path.join(data_dir, 'data/letter_classifier'), train_transform)
-
 
     # trainning set 중 validation 데이터로 사용할 비율
     valid_size = 0.3
@@ -112,10 +104,6 @@ def create_datasets(batch_size):
 def imshow(input, title):
     # torch.Tensor를 numpy 객체로 변환
     input = input.numpy().transpose((1, 2, 0))
-    # 이미지 정규화 해제하기
-    mean = np.array([0.89839834, 0.89839834, 0.89839834])
-    std = np.array([0.28976783, 0.28976783, 0.28976783])
-    input = std * input + mean
     input = np.clip(input, 0, 1)
 
     # 이미지 출력
@@ -245,8 +233,6 @@ def logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, tra
     plt.title('Accuracy')
     plt.savefig('./logs/{}/acc.png'.format(exp_idx))
     plt.close()
-    
-    
 
 if __name__ == '__main__':
     
@@ -258,6 +244,23 @@ if __name__ == '__main__':
     os.makedirs('./checkpoints/{}/'.format(exp_idx), exist_ok=True)
 
     train_data, train_loader, valid_loader = create_datasets(batch_size=batch_size)
+    
+    # 학습 데이터를 배치 단위로 불러오기
+    iterator = iter(train_loader)
+    class_names = train_data.classes
+
+    # 현재 배치를 이용해 격자 형태의 이미지를 만들어 시각화
+    inputs, classes = next(iterator)
+    out = torchvision.utils.make_grid(inputs)
+    imshow(out, title=[class_names[x] for x in classes])
+    
+    # 학습 데이터를 배치 단위로 불러오기
+    iterator = iter(valid_loader)
+
+    # 현재 배치를 이용해 격자 형태의 이미지를 만들어 시각화
+    inputs, classes = next(iterator)
+    out = torchvision.utils.make_grid(inputs)
+    imshow(out, title=[class_names[x] for x in classes])
 
 
     print('Number of training dataset:', len(train_data))
@@ -267,7 +270,9 @@ if __name__ == '__main__':
     print('Number of classes:', len(class_names))
     
     
-    model = Classifier_CNN().to(device)
+    # model = Classifier_CNN().to(device)
     
-    print("Model Initialized")
-    train(model, learning_rate, train_loader, valid_loader, device)
+    # print("Model Initialized")
+    # train(model, learning_rate, train_loader, valid_loader, device)
+
+# %%
