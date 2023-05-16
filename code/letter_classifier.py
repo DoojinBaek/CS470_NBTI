@@ -115,33 +115,68 @@ class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.MaxPool2d(22, 22, 8),
-            torch.nn.Conv2d(1, 6, 2),
-            torch.nn.BatchNorm2d(6),
+            torch.nn.Conv2d(1, 16, kernel_size=4, stride=2),
+            torch.nn.BatchNorm2d(16),
             torch.nn.ReLU(),
-            torch.nn.MaxPool2d(2),
-            torch.nn.Conv2d(6, 12, 2),
-            torch.nn.BatchNorm2d(12),
-            torch.nn.ReLU(),
-            torch.nn.Conv2d(12, 24, 2),
-            torch.nn.BatchNorm2d(24),
-            torch.nn.ReLU(),
-            torch.nn.MaxPool2d(2),
+            torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer2 = torch.nn.Sequential(
-            torch.nn.Linear(600, 256),
+            torch.nn.Conv2d(16, 32, kernel_size=4, stride=2),
+            torch.nn.BatchNorm2d(32),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.layer3 = torch.nn.Sequential(
+            torch.nn.Conv2d(32, 64, kernel_size=4),
+            torch.nn.BatchNorm2d(64),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        self.layer4 = torch.nn.Sequential(
+            torch.nn.Conv2d(64, 128, kernel_size=2),
+            torch.nn.BatchNorm2d(128),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(kernel_size=2)
+        )
+        self.layer5 = torch.nn.Sequential(
+            torch.nn.Conv2d(128, 256, kernel_size=2),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(kernel_size=2)
+        )
+        self.layer6 = torch.nn.Sequential(
+            torch.nn.Conv2d(256, 512, kernel_size=2),
+            torch.nn.BatchNorm2d(512),
+            torch.nn.ReLU()
+        )
+        self.layer7 = torch.nn.Sequential(
+            torch.nn.Linear(2048, 1024),
+            torch.nn.BatchNorm1d(1024),
+            torch.nn.ReLU(),
+            torch.nn.Linear(1024, 512),
+            torch.nn.BatchNorm1d(512),
+            torch.nn.ReLU(),
+            torch.nn.Linear(512, 256),
+            torch.nn.BatchNorm1d(256),
             torch.nn.ReLU(),
             torch.nn.Linear(256, 128),
+            torch.nn.BatchNorm1d(128),
             torch.nn.ReLU(),
             torch.nn.Linear(128, 52)
         )
     
     def forward(self, x):
+
         x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+        x = self.layer5(x)
+        x = self.layer6(x)
         x = x.reshape(x.shape[0], -1)
-        out = self.layer2(x)
+        out = self.layer7(x) # input: batch_size x all_features
 
         return out # batch_size x 52
+
 
 ########## Training Code ##########
 def train(model, learning_rate, train_dataloader, valid_dataloader, device):
@@ -237,8 +272,8 @@ def logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, tra
 if __name__ == '__main__':
     
     device = 'cuda'
-    batch_size = 32
-    num_epochs = 1000
+    batch_size = 64
+    num_epochs = 5000
     learning_rate = 0.001
     os.makedirs('./logs/{}/'.format(exp_idx), exist_ok=True)
     os.makedirs('./checkpoints/{}/'.format(exp_idx), exist_ok=True)
@@ -269,10 +304,9 @@ if __name__ == '__main__':
     class_names = train_data.classes
     print('Number of classes:', len(class_names))
     
+    model = Classifier_CNN().to(device)
     
-    # model = Classifier_CNN().to(device)
-    
-    # print("Model Initialized")
-    # train(model, learning_rate, train_loader, valid_loader, device)
+    print("Model Initialized")
+    train(model, learning_rate, train_loader, valid_loader, device)
 
 # %%
