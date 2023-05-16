@@ -191,6 +191,8 @@ class Classifier_CNN(torch.nn.Module):
 def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor = 0.5, patience = 20, 
+                                                           threshold=0.00005)
     val_loss_min = np.inf
     val_acc_max = -np.inf
 
