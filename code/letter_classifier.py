@@ -117,50 +117,58 @@ class Classifier_CNN(torch.nn.Module):
         self.layer1 = torch.nn.Sequential(
             torch.nn.Conv2d(1, 16, kernel_size=4, stride=2),
             torch.nn.BatchNorm2d(16),
-            torch.nn.ReLU(),
+            torch.nn.SiLU(),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer2 = torch.nn.Sequential(
-            torch.nn.Conv2d(16, 32, kernel_size=4, stride=2),
+            torch.nn.Conv2d(16, 32, kernel_size=4),
             torch.nn.BatchNorm2d(32),
-            torch.nn.ReLU(),
+            torch.nn.SiLU(),
             torch.nn.MaxPool2d(kernel_size=2, stride=2)
         )
         self.layer3 = torch.nn.Sequential(
-            torch.nn.Conv2d(32, 64, kernel_size=4),
+            torch.nn.Conv2d(32, 64, kernel_size=3),
             torch.nn.BatchNorm2d(64),
-            torch.nn.ReLU(),
-            torch.nn.MaxPool2d(kernel_size=2, stride=2)
+            torch.nn.SiLU(),
+            torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer4 = torch.nn.Sequential(
-            torch.nn.Conv2d(64, 128, kernel_size=2),
+            torch.nn.Conv2d(64, 128, kernel_size=3),
             torch.nn.BatchNorm2d(128),
-            torch.nn.ReLU(),
+            torch.nn.SiLU(),
             torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer5 = torch.nn.Sequential(
             torch.nn.Conv2d(128, 256, kernel_size=2),
-            torch.nn.ReLU(),
+            torch.nn.BatchNorm2d(256),
+            torch.nn.SiLU(),
             torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer6 = torch.nn.Sequential(
             torch.nn.Conv2d(256, 512, kernel_size=2),
             torch.nn.BatchNorm2d(512),
-            torch.nn.ReLU()
+            torch.nn.SiLU(),
+            torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer7 = torch.nn.Sequential(
+            torch.nn.Conv2d(512, 512, kernel_size=2),
+            torch.nn.BatchNorm2d(512),
+            torch.nn.SiLU()
+        )
+        self.layer8 = torch.nn.Sequential(
             torch.nn.Linear(2048, 1024),
+            torch.nn.Dropout1d(0.2),
             torch.nn.BatchNorm1d(1024),
-            torch.nn.ReLU(),
+            torch.nn.SiLU(),
             torch.nn.Linear(1024, 512),
             torch.nn.BatchNorm1d(512),
-            torch.nn.ReLU(),
+            torch.nn.SiLU(),
             torch.nn.Linear(512, 256),
             torch.nn.BatchNorm1d(256),
-            torch.nn.ReLU(),
+            torch.nn.SiLU(),
             torch.nn.Linear(256, 128),
             torch.nn.BatchNorm1d(128),
-            torch.nn.ReLU(),
+            torch.nn.SiLU(),
             torch.nn.Linear(128, 52)
         )
     
@@ -172,8 +180,9 @@ class Classifier_CNN(torch.nn.Module):
         x = self.layer4(x)
         x = self.layer5(x)
         x = self.layer6(x)
+        x = self.layer7(x)
         x = x.reshape(x.shape[0], -1)
-        out = self.layer7(x) # input: batch_size x all_features
+        out = self.layer8(x)
 
         return out # batch_size x 52
 
