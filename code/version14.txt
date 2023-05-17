@@ -1,0 +1,655 @@
+Number of training dataset: 520
+Number of validation dataset 3
+Number of classes: 52
+Model Initialized
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 16, 397, 397]             272
+       BatchNorm2d-2         [-1, 16, 397, 397]              32
+              SiLU-3         [-1, 16, 397, 397]               0
+         Dropout2d-4         [-1, 16, 397, 397]               0
+         MaxPool2d-5           [-1, 16, 99, 99]               0
+            Conv2d-6           [-1, 32, 96, 96]           8,224
+       BatchNorm2d-7           [-1, 32, 96, 96]              64
+              SiLU-8           [-1, 32, 96, 96]               0
+         Dropout2d-9           [-1, 32, 96, 96]               0
+        MaxPool2d-10           [-1, 32, 48, 48]               0
+           Conv2d-11           [-1, 64, 46, 46]          18,496
+      BatchNorm2d-12           [-1, 64, 46, 46]             128
+             SiLU-13           [-1, 64, 46, 46]               0
+        Dropout2d-14           [-1, 64, 46, 46]               0
+        MaxPool2d-15           [-1, 64, 23, 23]               0
+           Conv2d-16          [-1, 128, 22, 22]          32,896
+      BatchNorm2d-17          [-1, 128, 22, 22]             256
+             SiLU-18          [-1, 128, 22, 22]               0
+        Dropout2d-19          [-1, 128, 22, 22]               0
+        MaxPool2d-20          [-1, 128, 11, 11]               0
+           Conv2d-21          [-1, 256, 10, 10]         131,328
+      BatchNorm2d-22          [-1, 256, 10, 10]             512
+             SiLU-23          [-1, 256, 10, 10]               0
+        Dropout2d-24          [-1, 256, 10, 10]               0
+        MaxPool2d-25            [-1, 256, 5, 5]               0
+           Conv2d-26            [-1, 512, 4, 4]         524,800
+      BatchNorm2d-27            [-1, 512, 4, 4]           1,024
+             SiLU-28            [-1, 512, 4, 4]               0
+        Dropout2d-29            [-1, 512, 4, 4]               0
+        MaxPool2d-30            [-1, 512, 2, 2]               0
+           Linear-31                  [-1, 512]       1,049,088
+      BatchNorm1d-32                  [-1, 512]           1,024
+             SiLU-33                  [-1, 512]               0
+           Linear-34                  [-1, 256]         131,328
+      BatchNorm1d-35                  [-1, 256]             512
+             SiLU-36                  [-1, 256]               0
+           Linear-37                  [-1, 128]          32,896
+      BatchNorm1d-38                  [-1, 128]             256
+             SiLU-39                  [-1, 128]               0
+           Linear-40                   [-1, 52]           6,708
+================================================================
+Total params: 1,939,844
+Trainable params: 1,939,844
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.61
+Forward/backward pass size (MB): 95.23
+Params size (MB): 7.40
+Estimated Total Size (MB): 103.24
+----------------------------------------------------------------
+None
+Epoch: 0
+new minimum validation loss: 4.052673816680908
+new maximum validation accuracy: 0.03273809523809524
+Elapsed Time: 0.08050
+Epoch: 1
+new minimum validation loss: 3.8801539738972983
+Elapsed Time: 0.06915
+Epoch: 2
+new minimum validation loss: 3.7320162455240884
+new maximum validation accuracy: 0.06770833333333333
+Elapsed Time: 0.07488
+Epoch: 3
+new minimum validation loss: 3.5705211957295737
+new maximum validation accuracy: 0.06919642857142856
+Elapsed Time: 0.07291
+Epoch: 4
+new minimum validation loss: 3.3720405101776123
+new maximum validation accuracy: 0.12053571428571429
+Elapsed Time: 0.06919
+Epoch: 5
+new minimum validation loss: 3.314778486887614
+new maximum validation accuracy: 0.1324404761904762
+Elapsed Time: 0.07664
+Epoch: 6
+new minimum validation loss: 3.1055967807769775
+new maximum validation accuracy: 0.13616071428571427
+Elapsed Time: 0.07743
+Epoch: 7
+new maximum validation accuracy: 0.1525297619047619
+Elapsed Time: 0.06600
+Epoch: 8
+new minimum validation loss: 2.7342864672342935
+new maximum validation accuracy: 0.24776785714285712
+Elapsed Time: 0.07067
+Epoch: 9
+Elapsed Time: 0.07417
+Epoch: 10
+new minimum validation loss: 2.3449140389760337
+Elapsed Time: 0.07145
+Epoch: 11
+new minimum validation loss: 2.2754940191904702
+new maximum validation accuracy: 0.32217261904761907
+Elapsed Time: 0.07019
+Epoch: 12
+Elapsed Time: 0.06440
+Epoch: 13
+new minimum validation loss: 2.1474302609761557
+new maximum validation accuracy: 0.33110119047619047
+Elapsed Time: 0.06323
+Epoch: 14
+Elapsed Time: 0.06316
+Epoch: 15
+new minimum validation loss: 1.9804211457570393
+new maximum validation accuracy: 0.37202380952380953
+Elapsed Time: 0.07662
+Epoch: 16
+Elapsed Time: 0.06784
+Epoch: 17
+Elapsed Time: 0.06303
+Epoch: 18
+Elapsed Time: 0.06487
+Epoch: 19
+new minimum validation loss: 1.934553623199463
+new maximum validation accuracy: 0.3913690476190476
+Elapsed Time: 0.06721
+Epoch: 20
+new minimum validation loss: 1.727815826733907
+new maximum validation accuracy: 0.39732142857142855
+Elapsed Time: 0.08313
+Epoch: 21
+Elapsed Time: 0.06418
+Epoch: 22
+Elapsed Time: 0.06142
+Epoch: 23
+new maximum validation accuracy: 0.4069940476190476
+Elapsed Time: 0.06511
+Epoch: 24
+Elapsed Time: 0.06157
+Epoch: 25
+Elapsed Time: 0.07007
+Epoch: 26
+new minimum validation loss: 1.7156943877538045
+new maximum validation accuracy: 0.4226190476190476
+Elapsed Time: 0.06826
+Epoch: 27
+new maximum validation accuracy: 0.44122023809523814
+Elapsed Time: 0.06572
+Epoch: 28
+new minimum validation loss: 1.6805284818013508
+new maximum validation accuracy: 0.4456845238095238
+Elapsed Time: 0.06560
+Epoch: 29
+new maximum validation accuracy: 0.46577380952380953
+Elapsed Time: 0.07308
+Epoch: 30
+Elapsed Time: 0.07412
+Epoch: 31
+Elapsed Time: 0.06681
+Epoch: 32
+Elapsed Time: 0.06457
+Epoch: 33
+new minimum validation loss: 1.6585946480433147
+new maximum validation accuracy: 0.47767857142857145
+Elapsed Time: 0.06914
+Epoch: 34
+Elapsed Time: 0.06287
+Epoch: 35
+new minimum validation loss: 1.633314609527588
+new maximum validation accuracy: 0.4985119047619048
+Elapsed Time: 0.07401
+Epoch: 36
+new minimum validation loss: 1.5655255317687988
+Elapsed Time: 0.07155
+Epoch: 37
+Elapsed Time: 0.06590
+Epoch: 38
+Elapsed Time: 0.06447
+Epoch: 39
+Elapsed Time: 0.06525
+Epoch: 40
+Elapsed Time: 0.06887
+Epoch: 41
+Elapsed Time: 0.07060
+Epoch: 42
+Elapsed Time: 0.06433
+Epoch: 43
+Elapsed Time: 0.06634
+Epoch: 44
+new minimum validation loss: 1.4375487963358562
+Elapsed Time: 0.06013
+Epoch: 45
+Elapsed Time: 0.07712
+Epoch: 46
+new maximum validation accuracy: 0.5119047619047619
+Elapsed Time: 0.06930
+Epoch: 47
+Elapsed Time: 0.06803
+Epoch: 48
+Elapsed Time: 0.06150
+Epoch: 49
+Elapsed Time: 0.06707
+Epoch: 50
+Elapsed Time: 0.07438
+Epoch: 51
+Elapsed Time: 0.06954
+Epoch: 52
+Elapsed Time: 0.06487
+Epoch: 53
+Elapsed Time: 0.06535
+Epoch: 54
+Elapsed Time: 0.06643
+Epoch: 55
+new maximum validation accuracy: 0.5290178571428571
+Elapsed Time: 0.07327
+Epoch: 56
+Elapsed Time: 0.06845
+Epoch: 57
+Elapsed Time: 0.06428
+Epoch: 58
+Elapsed Time: 0.06635
+Epoch: 59
+Elapsed Time: 0.07061
+Epoch: 60
+Elapsed Time: 0.07500
+Epoch: 61
+Elapsed Time: 0.06777
+Epoch: 62
+Elapsed Time: 0.06353
+Epoch: 63
+Elapsed Time: 0.06388
+Epoch: 64
+Elapsed Time: 0.06565
+Epoch: 65
+Elapsed Time: 0.07061
+Epoch: 66
+Elapsed Time: 0.06413
+Epoch: 67
+Elapsed Time: 0.06463
+Epoch: 68
+Elapsed Time: 0.06297
+Epoch: 69
+Elapsed Time: 0.06345
+Epoch: 70
+Elapsed Time: 0.07249
+Epoch: 71
+Elapsed Time: 0.06859
+Epoch: 72
+Elapsed Time: 0.06569
+Epoch: 73
+Elapsed Time: 0.06634
+Epoch: 74
+new maximum validation accuracy: 0.5349702380952381
+Elapsed Time: 0.06224
+Epoch: 75
+Elapsed Time: 0.07522
+Epoch: 76
+Elapsed Time: 0.07083
+Epoch: 77
+Elapsed Time: 0.06215
+Epoch: 78
+Elapsed Time: 0.06015
+Epoch: 79
+Elapsed Time: 0.06309
+Epoch: 80
+Elapsed Time: 0.06465
+Epoch: 81
+new minimum validation loss: 1.3377175728480022
+new maximum validation accuracy: 0.5788690476190476
+Elapsed Time: 0.06964
+Epoch: 82
+Elapsed Time: 0.06342
+Epoch: 83
+Elapsed Time: 0.05947
+Epoch: 84
+Elapsed Time: 0.06254
+Epoch: 85
+Elapsed Time: 0.06197
+Epoch: 86
+Elapsed Time: 0.07007
+Epoch: 87
+Elapsed Time: 0.06419
+Epoch: 88
+Elapsed Time: 0.06693
+Epoch: 89
+Elapsed Time: 0.07506
+Epoch: 90
+Elapsed Time: 0.06747
+Epoch: 91
+Elapsed Time: 0.07198
+Epoch: 92
+Elapsed Time: 0.07485
+Epoch: 93
+Elapsed Time: 0.06494
+Epoch: 94
+Elapsed Time: 0.06272
+Epoch: 95
+Elapsed Time: 0.06546
+Epoch: 96
+Elapsed Time: 0.06884
+Epoch: 97
+Elapsed Time: 0.06548
+Epoch: 98
+Elapsed Time: 0.06189
+Epoch: 99
+Elapsed Time: 0.06720
+Epoch: 100
+Elapsed Time: 0.06593
+Epoch: 101
+Elapsed Time: 0.06618
+Epoch: 102
+Elapsed Time: 0.06882
+Epoch: 103
+Elapsed Time: 0.06513
+Epoch: 104
+Elapsed Time: 0.06485
+Epoch: 105
+Elapsed Time: 0.06494
+Epoch: 106
+Elapsed Time: 0.07535
+Epoch: 107
+Elapsed Time: 0.06894
+Epoch: 108
+Elapsed Time: 0.06740
+Epoch: 109
+Elapsed Time: 0.06460
+Epoch: 110
+Elapsed Time: 0.06190
+Epoch: 111
+Elapsed Time: 0.06677
+Epoch: 112
+Elapsed Time: 0.06875
+Epoch: 113
+Elapsed Time: 0.06190
+Epoch: 114
+Elapsed Time: 0.06526
+Epoch: 115
+Elapsed Time: 0.06220
+Epoch: 116
+Elapsed Time: 0.07650
+Epoch: 117
+Elapsed Time: 0.07018
+Epoch: 118
+Elapsed Time: 0.06307
+Epoch: 119
+Elapsed Time: 0.07975
+Epoch: 120
+Elapsed Time: 0.06219
+Epoch: 121
+Elapsed Time: 0.07174
+Epoch: 122
+new maximum validation accuracy: 0.5848214285714285
+Elapsed Time: 0.06579
+Epoch: 123
+Elapsed Time: 0.06513
+Epoch: 124
+Elapsed Time: 0.06549
+Epoch: 125
+Elapsed Time: 0.06237
+Epoch: 126
+Elapsed Time: 0.07021
+Epoch: 127
+Elapsed Time: 0.06801
+Epoch: 128
+Elapsed Time: 0.06591
+Epoch: 129
+Elapsed Time: 0.06299
+Epoch: 130
+Elapsed Time: 0.06348
+Epoch: 131
+Elapsed Time: 0.06862
+Epoch: 132
+Elapsed Time: 0.06900
+Epoch: 133
+Elapsed Time: 0.06171
+Epoch: 134
+Elapsed Time: 0.06492
+Epoch: 135
+Elapsed Time: 0.06643
+Epoch: 136
+Elapsed Time: 0.07679
+Epoch: 137
+Elapsed Time: 0.06482
+Epoch: 138
+Elapsed Time: 0.06397
+Epoch: 139
+Elapsed Time: 0.06433
+Epoch: 140
+Elapsed Time: 0.06431
+Epoch: 141
+Elapsed Time: 0.07228
+Epoch: 142
+Elapsed Time: 0.06221
+Epoch: 143
+Elapsed Time: 0.06204
+Epoch: 144
+Elapsed Time: 0.06192
+Epoch: 145
+Elapsed Time: 0.06598
+Epoch: 146
+Elapsed Time: 0.07260
+Epoch: 147
+Elapsed Time: 0.06722
+Epoch: 148
+Elapsed Time: 0.06789
+Epoch: 149
+Elapsed Time: 0.07772
+Epoch: 150
+Elapsed Time: 0.06258
+Epoch: 151
+Elapsed Time: 0.08312
+Epoch: 152
+Elapsed Time: 0.06770
+Epoch: 153
+Elapsed Time: 0.06898
+Epoch: 154
+Elapsed Time: 0.07684
+Epoch: 155
+Elapsed Time: 0.07287
+Epoch: 156
+new maximum validation accuracy: 0.5877976190476191
+Elapsed Time: 0.06601
+Epoch: 157
+Elapsed Time: 0.06296
+Epoch: 158
+Elapsed Time: 0.06310
+Epoch: 159
+Elapsed Time: 0.06501
+Epoch: 160
+Elapsed Time: 0.08342
+Epoch: 161
+Elapsed Time: 0.06581
+Epoch: 162
+Elapsed Time: 0.06387
+Epoch: 163
+Elapsed Time: 0.06202
+Epoch: 164
+Elapsed Time: 0.06251
+Epoch: 165
+Elapsed Time: 0.07561
+Epoch: 166
+Elapsed Time: 0.06454
+Epoch: 167
+Elapsed Time: 0.06478
+Epoch: 168
+Elapsed Time: 0.06504
+Epoch: 169
+Elapsed Time: 0.06637
+Epoch: 170
+Elapsed Time: 0.07854
+Epoch: 171
+Elapsed Time: 0.06897
+Epoch: 172
+Elapsed Time: 0.06901
+Epoch: 173
+Elapsed Time: 0.06786
+Epoch: 174
+Elapsed Time: 0.06690
+Epoch: 175
+Elapsed Time: 0.08074
+Epoch: 176
+Elapsed Time: 0.06832
+Epoch: 177
+Elapsed Time: 0.06499
+Epoch: 178
+Elapsed Time: 0.06434
+Epoch: 179
+Elapsed Time: 0.08041
+Epoch: 180
+Elapsed Time: 0.07378
+Epoch: 181
+Elapsed Time: 0.06954
+Epoch: 182
+Elapsed Time: 0.06527
+Epoch: 183
+Elapsed Time: 0.06394
+Epoch: 184
+Elapsed Time: 0.06334
+Epoch: 185
+Elapsed Time: 0.07624
+Epoch: 186
+Elapsed Time: 0.06634
+Epoch: 187
+Elapsed Time: 0.06722
+Epoch: 188
+Elapsed Time: 0.06381
+Epoch: 189
+Elapsed Time: 0.06632
+Epoch: 190
+Elapsed Time: 0.07656
+Epoch: 191
+Elapsed Time: 0.06649
+Epoch: 192
+Elapsed Time: 0.06936
+Epoch: 193
+Elapsed Time: 0.06624
+Epoch: 194
+Elapsed Time: 0.06495
+Epoch: 195
+Elapsed Time: 0.07590
+Epoch: 196
+Elapsed Time: 0.07346
+Epoch: 197
+Elapsed Time: 0.07310
+Epoch: 198
+Elapsed Time: 0.07394
+Epoch: 199
+Elapsed Time: 0.09507
+Epoch: 200
+Elapsed Time: 0.06447
+Epoch: 201
+Elapsed Time: 0.07030
+Epoch: 202
+Elapsed Time: 0.07527
+Epoch: 203
+Elapsed Time: 0.07575
+Epoch: 204
+Elapsed Time: 0.07729
+Epoch: 205
+Elapsed Time: 0.07493
+Epoch: 206
+Elapsed Time: 0.07259
+Epoch: 207
+Elapsed Time: 0.07307
+Epoch: 208
+Elapsed Time: 0.07236
+Epoch: 209
+Elapsed Time: 0.08191
+Epoch: 210
+Elapsed Time: 0.07734
+Epoch: 211
+Elapsed Time: 0.06843
+Epoch: 212
+Elapsed Time: 0.06977
+Epoch: 213
+Elapsed Time: 0.08315
+Epoch: 214
+Elapsed Time: 0.07118
+Epoch: 215
+Elapsed Time: 0.07540
+Epoch: 216
+Elapsed Time: 0.06879
+Epoch: 217
+Elapsed Time: 0.07624
+Epoch: 218
+Elapsed Time: 0.07462
+Epoch: 219
+Elapsed Time: 0.07997
+Epoch: 220
+Elapsed Time: 0.06941
+Epoch: 221
+Elapsed Time: 0.07260
+Epoch: 222
+Elapsed Time: 0.07296
+Epoch: 223
+Elapsed Time: 0.07693
+Epoch: 224
+Elapsed Time: 0.07264
+Epoch: 225
+Elapsed Time: 0.06955
+Epoch: 226
+Elapsed Time: 0.07248
+Epoch: 227
+Elapsed Time: 0.07767
+Epoch: 228
+Elapsed Time: 0.07252
+Epoch: 229
+Elapsed Time: 0.07024
+Epoch: 230
+Elapsed Time: 0.07052
+Epoch: 231
+Elapsed Time: 0.07280
+Epoch: 232
+Elapsed Time: 0.06839
+Epoch: 233
+Elapsed Time: 0.06965
+Epoch: 234
+Elapsed Time: 0.06370
+Epoch: 235
+Elapsed Time: 0.06599
+Epoch: 236
+Elapsed Time: 0.07346
+Epoch: 237
+Elapsed Time: 0.07042
+Epoch: 238
+Elapsed Time: 0.06511
+Epoch: 239
+new maximum validation accuracy: 0.6086309523809524
+Elapsed Time: 0.07853
+Epoch: 240
+Elapsed Time: 0.07132
+Epoch: 241
+Elapsed Time: 0.07321
+Epoch: 242
+Elapsed Time: 0.07023
+Epoch: 243
+Elapsed Time: 0.06660
+Epoch: 244
+Elapsed Time: 0.06917
+Epoch: 245
+Elapsed Time: 0.06911
+Epoch: 246
+Elapsed Time: 0.07591
+Epoch: 247
+Elapsed Time: 0.07382
+Epoch: 248
+Elapsed Time: 0.07054
+Epoch: 249
+Elapsed Time: 0.07131
+Epoch: 250
+Elapsed Time: 0.08233
+Epoch: 251
+Elapsed Time: 0.06806
+Epoch: 252
+Elapsed Time: 0.06498
+Epoch: 253
+Elapsed Time: 0.06719
+Epoch: 254
+Elapsed Time: 0.06744
+Epoch: 255
+Elapsed Time: 0.07860
+Epoch: 256
+Elapsed Time: 0.06776
+Epoch: 257
+Elapsed Time: 0.06605
+Epoch: 258
+Elapsed Time: 0.06842
+Epoch: 259
+Elapsed Time: 0.07023
+Epoch: 260
+Elapsed Time: 0.08845
+Epoch: 261
+Elapsed Time: 0.07286
+Epoch: 262
+Elapsed Time: 0.06561
+Epoch: 263
+Elapsed Time: 0.06872
+Epoch: 264
+Elapsed Time: 0.08077
+Epoch: 265
+Elapsed Time: 0.06648
+Epoch: 266
+Elapsed Time: 0.06909
+Epoch: 267
+Elapsed Time: 0.06825
+Epoch: 268
+Elapsed Time: 0.06711
+Epoch: 269
+Elapsed Time: 0.08854
+Epoch: 270
+Elapsed Time: 0.08391
+Epoch: 271
+Elapsed Time: 0.07483
+Epoch: 272
+Elapsed Time: 0.07326
+Epoch: 273
+Elapsed Time: 0.08861
+Epoch: 274
