@@ -65,7 +65,7 @@ def create_datasets(batch_size):
 
     train_transform = transforms.Compose([
     transforms.Grayscale(1),
-    transforms.CenterCrop((400, 400)),
+    transforms.Resize((56, 56)),
     transforms.RandomRotation([-30, 30], fill=255),
     transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=255),
     transforms.Lambda(invert),
@@ -117,56 +117,32 @@ class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.Conv2d(1, 16, kernel_size = 6, stride = 2),
-            torch.nn.BatchNorm2d(16),
+            torch.nn.Conv2d(1, 8, kernel_size = 2),
+            torch.nn.BatchNorm2d(8),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
-            torch.nn.MaxPool2d(kernel_size=3)
+            torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer2 = torch.nn.Sequential(
-            torch.nn.Conv2d(16, 32, kernel_size=4),
+            torch.nn.Conv2d(8, 16, kernel_size=2),
+            torch.nn.BatchNorm2d(16),
+            torch.nn.SiLU(),
+            torch.nn.MaxPool2d(kernel_size=2)
+        )
+        self.layer3 = torch.nn.Sequential(
+            torch.nn.Conv2d(16, 32, kernel_size=2),
             torch.nn.BatchNorm2d(32),
             torch.nn.SiLU(),
             torch.nn.Dropout2d(0.2),
             torch.nn.MaxPool2d(kernel_size=2)
         )
-        self.layer3 = torch.nn.Sequential(
-            torch.nn.Conv2d(32, 64, kernel_size=3),
+        self.layer4 = torch.nn.Sequential(
+            torch.nn.Conv2d(32, 64, kernel_size=2),
             torch.nn.BatchNorm2d(64),
             torch.nn.SiLU(),
             torch.nn.Dropout2d(0.2),
-            torch.nn.MaxPool2d(kernel_size=2)
         )
-        self.layer4 = torch.nn.Sequential(
-            torch.nn.Conv2d(64, 128, kernel_size=2),
-            torch.nn.BatchNorm2d(128),
-            torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
-            torch.nn.MaxPool2d(kernel_size=2)
-        )
-        self.layer5 = torch.nn.Sequential(
-            torch.nn.Conv2d(128, 256, kernel_size=2),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2)
-        )
-        self.layer5 = torch.nn.Sequential(
-            torch.nn.Conv2d(256, 512, kernel_size=2),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.1)
-        )
-        self.layer5 = torch.nn.Sequential(
-            torch.nn.Conv2d(512, 1024, kernel_size=2),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.1)
-        )
-        self.layer7 = torch.nn.Sequential(
-            torch.nn.Linear(6400, 1024),
-            torch.nn.BatchNorm1d(1024),
-            torch.nn.SiLU(),
-            torch.nn.Linear(1024, 512),
+        self.linear_layer = torch.nn.Sequential(
+            torch.nn.Linear(1600, 512),
             torch.nn.BatchNorm1d(512),
             torch.nn.SiLU(),
             torch.nn.Linear(512, 256),
@@ -184,9 +160,8 @@ class Classifier_CNN(torch.nn.Module):
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
-        x = self.layer5(x)
         x = x.reshape(x.shape[0], -1)
-        out = self.layer7(x)
+        out = self.linear_layer(x)
 
         return out # batch_size x 52
 
@@ -210,7 +185,7 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     valid_loss_buffer.append(val_loss)
     valid_acc_buffer.append(val_acc)
     
-    print(summary(model, (1, 400, 400)))
+    print(summary(model, (1, 56, 56)))
     
     for epoch in range(num_epochs):
         
