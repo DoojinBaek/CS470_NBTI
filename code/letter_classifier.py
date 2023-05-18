@@ -148,21 +148,15 @@ class Classifier_CNN(torch.nn.Module):
             torch.nn.Conv2d(128, 256, kernel_size=2),
             torch.nn.BatchNorm2d(256),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
-            torch.nn.MaxPool2d(kernel_size=2)
+            torch.nn.Dropout2d(0.2)
         )
         self.layer6 = torch.nn.Sequential(
             torch.nn.Conv2d(256, 512, kernel_size=2),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
-            torch.nn.MaxPool2d(kernel_size=2)
+            torch.nn.BatchNorm2d(512),
+            torch.nn.SiLU()
         )
         self.layer7 = torch.nn.Sequential(
-            torch.nn.Linear(2304, 1024),
-            torch.nn.BatchNorm1d(1024),
-            torch.nn.SiLU(),
-            torch.nn.Linear(1024, 512),
+            torch.nn.Linear(8192, 512),
             torch.nn.BatchNorm1d(512),
             torch.nn.SiLU(),
             torch.nn.Linear(512, 256),
@@ -192,7 +186,7 @@ class Classifier_CNN(torch.nn.Module):
 def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor = 0.1, patience = 20, 
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = optimizer, mode='min', factor = 0.1, patience = 40, 
                                                            threshold=0.00001)
     val_loss_min = np.inf
     val_acc_max = -np.inf
@@ -230,13 +224,13 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
             loss.backward()
             optimizer.step()
             optimizer.zero_grad()
-        scheduler.step()
 
         val_loss, val_acc = calculate_val_loss_and_acc(model, loss_fn, valid_dataloader)
         valid_loss_buffer.append(val_loss)
         valid_acc_buffer.append(val_acc)
         train_loss_buffer.append(np.mean(train_loss_buffer_tmp))
         train_acc_buffer.append(np.mean(train_acc_buffer_tmp))
+        scheduler.step(val_loss)
 
         if val_loss < val_loss_min:
             print('new minimum validation loss:', val_loss)
@@ -248,7 +242,7 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
             val_acc_max = val_acc
             torch.save(model.state_dict(), "./checkpoints/{}/max_val_acc_chaekpoint.pt".format(exp_idx))
 
-        if (epoch+1)%10 == 0:
+        if (epoch+1)%100 == 0:
             torch.save(model.state_dict(), "./checkpoints/{}/epoch_{}.pt".format(exp_idx, epoch+1))
         if (epoch+1)%30 == 0:
             logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, train_acc_buffer)
