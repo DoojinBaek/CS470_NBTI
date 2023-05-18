@@ -1,0 +1,1654 @@
+Number of training dataset: 520
+Number of validation dataset 3
+Number of classes: 52
+Model Initialized
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 16, 198, 198]             592
+       BatchNorm2d-2         [-1, 16, 198, 198]              32
+              SiLU-3         [-1, 16, 198, 198]               0
+         Dropout2d-4         [-1, 16, 198, 198]               0
+         MaxPool2d-5           [-1, 16, 66, 66]               0
+            Conv2d-6           [-1, 32, 63, 63]           8,224
+       BatchNorm2d-7           [-1, 32, 63, 63]              64
+              SiLU-8           [-1, 32, 63, 63]               0
+         Dropout2d-9           [-1, 32, 63, 63]               0
+        MaxPool2d-10           [-1, 32, 31, 31]               0
+           Conv2d-11           [-1, 64, 29, 29]          18,496
+      BatchNorm2d-12           [-1, 64, 29, 29]             128
+             SiLU-13           [-1, 64, 29, 29]               0
+        Dropout2d-14           [-1, 64, 29, 29]               0
+        MaxPool2d-15           [-1, 64, 14, 14]               0
+           Conv2d-16          [-1, 128, 13, 13]          32,896
+      BatchNorm2d-17          [-1, 128, 13, 13]             256
+             SiLU-18          [-1, 128, 13, 13]               0
+        Dropout2d-19          [-1, 128, 13, 13]               0
+        MaxPool2d-20            [-1, 128, 6, 6]               0
+           Conv2d-21            [-1, 256, 5, 5]         131,328
+      BatchNorm2d-22            [-1, 256, 5, 5]             512
+             SiLU-23            [-1, 256, 5, 5]               0
+        Dropout2d-24            [-1, 256, 5, 5]               0
+           Linear-25                 [-1, 1024]       6,554,624
+      BatchNorm1d-26                 [-1, 1024]           2,048
+             SiLU-27                 [-1, 1024]               0
+           Linear-28                  [-1, 512]         524,800
+      BatchNorm1d-29                  [-1, 512]           1,024
+             SiLU-30                  [-1, 512]               0
+           Linear-31                  [-1, 256]         131,328
+      BatchNorm1d-32                  [-1, 256]             512
+             SiLU-33                  [-1, 256]               0
+           Linear-34                  [-1, 128]          32,896
+      BatchNorm1d-35                  [-1, 128]             256
+             SiLU-36                  [-1, 128]               0
+           Linear-37                   [-1, 52]           6,708
+================================================================
+Total params: 7,446,724
+Trainable params: 7,446,724
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.61
+Forward/backward pass size (MB): 26.46
+Params size (MB): 28.41
+Estimated Total Size (MB): 55.48
+----------------------------------------------------------------
+None
+Epoch: 0
+new minimum validation loss: 4.132598082224528
+new maximum validation accuracy: 0.03794642857142857
+Elapsed Time: 0.06878
+Epoch: 1
+new minimum validation loss: 3.9953555266062417
+Elapsed Time: 0.06853
+Epoch: 2
+new minimum validation loss: 3.875862201054891
+Elapsed Time: 0.08266
+Epoch: 3
+new minimum validation loss: 3.709007819493612
+new maximum validation accuracy: 0.046875
+Elapsed Time: 0.06720
+Epoch: 4
+new minimum validation loss: 3.651285092035929
+new maximum validation accuracy: 0.05505952380952381
+Elapsed Time: 0.06366
+Epoch: 5
+new minimum validation loss: 3.6262410481770835
+new maximum validation accuracy: 0.08258928571428571
+Elapsed Time: 0.06667
+Epoch: 6
+new minimum validation loss: 3.3739521503448486
+new maximum validation accuracy: 0.09375
+Elapsed Time: 0.06610
+Epoch: 7
+new minimum validation loss: 3.048354148864746
+new maximum validation accuracy: 0.12425595238095238
+Elapsed Time: 0.06791
+Epoch: 8
+Elapsed Time: 0.07152
+Epoch: 9
+Elapsed Time: 0.06186
+Epoch: 10
+new minimum validation loss: 2.8614187240600586
+new maximum validation accuracy: 0.13764880952380953
+Elapsed Time: 0.06764
+Epoch: 11
+new minimum validation loss: 2.714150587717692
+new maximum validation accuracy: 0.14136904761904762
+Elapsed Time: 0.07025
+Epoch: 12
+new minimum validation loss: 2.6814719835917153
+new maximum validation accuracy: 0.17782738095238093
+Elapsed Time: 0.07029
+Epoch: 13
+Elapsed Time: 0.06554
+Epoch: 14
+new maximum validation accuracy: 0.19791666666666666
+Elapsed Time: 0.07651
+Epoch: 15
+new minimum validation loss: 2.6132916609446206
+Elapsed Time: 0.06348
+Epoch: 16
+new minimum validation loss: 2.4710167249043784
+new maximum validation accuracy: 0.3162202380952381
+Elapsed Time: 0.06856
+Epoch: 17
+new minimum validation loss: 2.3739763100941977
+Elapsed Time: 0.06764
+Epoch: 18
+Elapsed Time: 0.06480
+Epoch: 19
+Elapsed Time: 0.06434
+Epoch: 20
+Elapsed Time: 0.07441
+Epoch: 21
+new minimum validation loss: 2.3477158149083457
+Elapsed Time: 0.06267
+Epoch: 22
+new minimum validation loss: 2.2338743209838867
+Elapsed Time: 0.06959
+Epoch: 23
+Elapsed Time: 0.06496
+Epoch: 24
+Elapsed Time: 0.06612
+Epoch: 25
+new minimum validation loss: 2.0671562353769937
+new maximum validation accuracy: 0.37053571428571425
+Elapsed Time: 0.07135
+Epoch: 26
+Elapsed Time: 0.08388
+Epoch: 27
+new minimum validation loss: 2.0295690298080444
+Elapsed Time: 0.06751
+Epoch: 28
+Elapsed Time: 0.06178
+Epoch: 29
+Elapsed Time: 0.07660
+Epoch: 30
+new minimum validation loss: 1.9781256516774495
+Elapsed Time: 0.06764
+Epoch: 31
+new maximum validation accuracy: 0.37723214285714285
+Elapsed Time: 0.06746
+Epoch: 32
+Elapsed Time: 0.06645
+Epoch: 33
+new minimum validation loss: 1.9579752683639526
+Elapsed Time: 0.08153
+Epoch: 34
+new minimum validation loss: 1.8179476261138916
+new maximum validation accuracy: 0.41220238095238093
+Elapsed Time: 0.07092
+Epoch: 35
+new minimum validation loss: 1.8069372177124023
+Elapsed Time: 0.06539
+Epoch: 36
+Elapsed Time: 0.06350
+Epoch: 37
+Elapsed Time: 0.06403
+Epoch: 38
+Elapsed Time: 0.06444
+Epoch: 39
+new minimum validation loss: 1.763938546180725
+Elapsed Time: 0.06884
+Epoch: 40
+Elapsed Time: 0.07618
+Epoch: 41
+Elapsed Time: 0.05948
+Epoch: 42
+Elapsed Time: 0.05873
+Epoch: 43
+Elapsed Time: 0.06311
+Epoch: 44
+Elapsed Time: 0.06497
+Epoch: 45
+Elapsed Time: 0.06311
+Epoch: 46
+new minimum validation loss: 1.6772063970565796
+new maximum validation accuracy: 0.4828869047619048
+Elapsed Time: 0.06419
+Epoch: 47
+Elapsed Time: 0.07699
+Epoch: 48
+Elapsed Time: 0.06119
+Epoch: 49
+Elapsed Time: 0.05926
+Epoch: 50
+new minimum validation loss: 1.6707451740900676
+Elapsed Time: 0.06769
+Epoch: 51
+Elapsed Time: 0.06536
+Epoch: 52
+new minimum validation loss: 1.6700434684753418
+Elapsed Time: 0.06805
+Epoch: 53
+Elapsed Time: 0.06471
+Epoch: 54
+new minimum validation loss: 1.6451109250386555
+Elapsed Time: 0.07858
+Epoch: 55
+new minimum validation loss: 1.6300941705703735
+Elapsed Time: 0.06178
+Epoch: 56
+new minimum validation loss: 1.5035616159439087
+Elapsed Time: 0.06744
+Epoch: 57
+Elapsed Time: 0.06536
+Epoch: 58
+Elapsed Time: 0.06555
+Epoch: 59
+Elapsed Time: 0.07214
+Epoch: 60
+Elapsed Time: 0.06149
+Epoch: 61
+Elapsed Time: 0.06481
+Epoch: 62
+Elapsed Time: 0.07789
+Epoch: 63
+Elapsed Time: 0.06558
+Epoch: 64
+Elapsed Time: 0.06566
+Epoch: 65
+Elapsed Time: 0.06565
+Epoch: 66
+Elapsed Time: 0.06508
+Epoch: 67
+Elapsed Time: 0.06331
+Epoch: 68
+new minimum validation loss: 1.4692507982254028
+Elapsed Time: 0.06858
+Epoch: 69
+Elapsed Time: 0.06174
+Epoch: 70
+Elapsed Time: 0.07932
+Epoch: 71
+new minimum validation loss: 1.4205454587936401
+Elapsed Time: 0.06722
+Epoch: 72
+Elapsed Time: 0.06533
+Epoch: 73
+Elapsed Time: 0.06454
+Epoch: 74
+Elapsed Time: 0.06328
+Epoch: 75
+Elapsed Time: 0.06326
+Epoch: 76
+Elapsed Time: 0.06520
+Epoch: 77
+Elapsed Time: 0.08139
+Epoch: 78
+Elapsed Time: 0.06531
+Epoch: 79
+Elapsed Time: 0.06615
+Epoch: 80
+Elapsed Time: 0.06600
+Epoch: 81
+Elapsed Time: 0.06568
+Epoch: 82
+Elapsed Time: 0.06550
+Epoch: 83
+Elapsed Time: 0.06104
+Epoch: 84
+Elapsed Time: 0.07915
+Epoch: 85
+Elapsed Time: 0.06633
+Epoch: 86
+Elapsed Time: 0.06331
+Epoch: 87
+Elapsed Time: 0.06623
+Epoch: 88
+new minimum validation loss: 1.387753168741862
+new maximum validation accuracy: 0.5059523809523809
+Elapsed Time: 0.07150
+Epoch: 89
+Elapsed Time: 0.06877
+Epoch: 90
+Elapsed Time: 0.06328
+Epoch: 91
+Elapsed Time: 0.07859
+Epoch: 92
+Elapsed Time: 0.06238
+Epoch: 93
+Elapsed Time: 0.06438
+Epoch: 94
+Elapsed Time: 0.06563
+Epoch: 95
+new minimum validation loss: 1.1766511003176372
+new maximum validation accuracy: 0.5267857142857143
+Elapsed Time: 0.06581
+Epoch: 96
+Elapsed Time: 0.06602
+Epoch: 97
+Elapsed Time: 0.06340
+Epoch: 98
+Elapsed Time: 0.08242
+Epoch: 99
+Elapsed Time: 0.06673
+Epoch: 100
+Elapsed Time: 0.05856
+Epoch: 101
+Elapsed Time: 0.05827
+Epoch: 102
+Elapsed Time: 0.06499
+Epoch: 103
+Elapsed Time: 0.06379
+Epoch: 104
+Elapsed Time: 0.05991
+Epoch: 105
+new maximum validation accuracy: 0.5654761904761905
+Elapsed Time: 0.08352
+Epoch: 106
+Elapsed Time: 0.06025
+Epoch: 107
+Elapsed Time: 0.06219
+Epoch: 108
+Elapsed Time: 0.06565
+Epoch: 109
+Elapsed Time: 0.06208
+Epoch: 110
+Elapsed Time: 0.06535
+Epoch: 111
+Elapsed Time: 0.06604
+Epoch: 112
+Elapsed Time: 0.07218
+Epoch: 113
+Elapsed Time: 0.06768
+Epoch: 114
+Elapsed Time: 0.06592
+Epoch: 115
+Elapsed Time: 0.06455
+Epoch: 116
+Elapsed Time: 0.06423
+Epoch: 117
+Elapsed Time: 0.06456
+Epoch: 118
+Elapsed Time: 0.08275
+Epoch: 119
+Elapsed Time: 0.07326
+Epoch: 120
+Elapsed Time: 0.06660
+Epoch: 121
+Elapsed Time: 0.06484
+Epoch: 122
+Elapsed Time: 0.06365
+Epoch: 123
+Elapsed Time: 0.06574
+Epoch: 124
+Elapsed Time: 0.08184
+Epoch: 125
+Elapsed Time: 0.06628
+Epoch: 126
+Elapsed Time: 0.06575
+Epoch: 127
+Elapsed Time: 0.06320
+Epoch: 128
+Elapsed Time: 0.06398
+Epoch: 129
+Elapsed Time: 0.06597
+Epoch: 130
+Elapsed Time: 0.06456
+Epoch: 131
+Elapsed Time: 0.07472
+Epoch: 132
+Elapsed Time: 0.06569
+Epoch: 133
+Elapsed Time: 0.06490
+Epoch: 134
+Elapsed Time: 0.06489
+Epoch: 135
+Elapsed Time: 0.06523
+Epoch: 136
+Elapsed Time: 0.06433
+Epoch: 137
+Elapsed Time: 0.06582
+Epoch: 138
+Elapsed Time: 0.07606
+Epoch: 139
+Elapsed Time: 0.06549
+Epoch: 140
+Elapsed Time: 0.06478
+Epoch: 141
+Elapsed Time: 0.06406
+Epoch: 142
+new minimum validation loss: 1.1591351826985676
+new maximum validation accuracy: 0.6049107142857143
+Elapsed Time: 0.06978
+Epoch: 143
+Elapsed Time: 0.06512
+Epoch: 144
+Elapsed Time: 0.06499
+Epoch: 145
+Elapsed Time: 0.07600
+Epoch: 146
+Elapsed Time: 0.06774
+Epoch: 147
+Elapsed Time: 0.06492
+Epoch: 148
+Elapsed Time: 0.06576
+Epoch: 149
+Elapsed Time: 0.07254
+Epoch: 150
+Elapsed Time: 0.06077
+Epoch: 151
+Elapsed Time: 0.07853
+Epoch: 152
+Elapsed Time: 0.06616
+Epoch: 153
+Elapsed Time: 0.06935
+Epoch: 154
+Elapsed Time: 0.06628
+Epoch: 155
+Elapsed Time: 0.06582
+Epoch: 156
+Elapsed Time: 0.06518
+Epoch: 157
+Elapsed Time: 0.07162
+Epoch: 158
+Elapsed Time: 0.06715
+Epoch: 159
+Elapsed Time: 0.06540
+Epoch: 160
+Elapsed Time: 0.06442
+Epoch: 161
+Elapsed Time: 0.06561
+Epoch: 162
+Elapsed Time: 0.06348
+Epoch: 163
+Elapsed Time: 0.07970
+Epoch: 164
+Elapsed Time: 0.06646
+Epoch: 165
+Elapsed Time: 0.06335
+Epoch: 166
+Elapsed Time: 0.06443
+Epoch: 167
+Elapsed Time: 0.06418
+Epoch: 168
+Elapsed Time: 0.06468
+Epoch: 169
+Elapsed Time: 0.06357
+Epoch: 170
+Elapsed Time: 0.06694
+Epoch: 171
+Elapsed Time: 0.07244
+Epoch: 172
+Elapsed Time: 0.06716
+Epoch: 173
+Elapsed Time: 0.06610
+Epoch: 174
+Elapsed Time: 0.06574
+Epoch: 175
+Elapsed Time: 0.06459
+Epoch: 176
+Elapsed Time: 0.06449
+Epoch: 177
+Elapsed Time: 0.06563
+Epoch: 178
+Elapsed Time: 0.07230
+Epoch: 179
+Elapsed Time: 0.08006
+Epoch: 180
+Elapsed Time: 0.06640
+Epoch: 181
+Elapsed Time: 0.06663
+Epoch: 182
+Elapsed Time: 0.06388
+Epoch: 183
+Elapsed Time: 0.05941
+Epoch: 184
+Elapsed Time: 0.06615
+Epoch: 185
+Elapsed Time: 0.06421
+Epoch: 186
+Elapsed Time: 0.08121
+Epoch: 187
+Elapsed Time: 0.06541
+Epoch: 188
+Elapsed Time: 0.06748
+Epoch: 189
+Elapsed Time: 0.06645
+Epoch: 190
+Elapsed Time: 0.06684
+Epoch: 191
+Elapsed Time: 0.06472
+Epoch: 192
+Elapsed Time: 0.06080
+Epoch: 193
+Elapsed Time: 0.06522
+Epoch: 194
+Elapsed Time: 0.06895
+Epoch: 195
+Elapsed Time: 0.06391
+Epoch: 196
+Elapsed Time: 0.06549
+Epoch: 197
+Elapsed Time: 0.06619
+Epoch: 198
+Elapsed Time: 0.06561
+Epoch: 199
+Elapsed Time: 0.06779
+Epoch: 200
+Elapsed Time: 0.06520
+Epoch: 201
+Elapsed Time: 0.08363
+Epoch: 202
+Elapsed Time: 0.06515
+Epoch: 203
+Elapsed Time: 0.06804
+Epoch: 204
+Elapsed Time: 0.06308
+Epoch: 205
+Elapsed Time: 0.06210
+Epoch: 206
+Elapsed Time: 0.06547
+Epoch: 207
+Elapsed Time: 0.06422
+Epoch: 208
+Elapsed Time: 0.08197
+Epoch: 209
+Elapsed Time: 0.07174
+Epoch: 210
+Elapsed Time: 0.06574
+Epoch: 211
+new maximum validation accuracy: 0.6324404761904762
+Elapsed Time: 0.06873
+Epoch: 212
+Elapsed Time: 0.06513
+Epoch: 213
+Elapsed Time: 0.06372
+Epoch: 214
+Elapsed Time: 0.06031
+Epoch: 215
+Elapsed Time: 0.06137
+Epoch: 216
+Elapsed Time: 0.07986
+Epoch: 217
+Elapsed Time: 0.06210
+Epoch: 218
+Elapsed Time: 0.06540
+Epoch: 219
+Elapsed Time: 0.06559
+Epoch: 220
+Elapsed Time: 0.06663
+Epoch: 221
+Elapsed Time: 0.06546
+Epoch: 222
+Elapsed Time: 0.06591
+Epoch: 223
+Elapsed Time: 0.07739
+Epoch: 224
+Elapsed Time: 0.06513
+Epoch: 225
+Elapsed Time: 0.05933
+Epoch: 226
+Elapsed Time: 0.06518
+Epoch: 227
+Elapsed Time: 0.06377
+Epoch: 228
+Elapsed Time: 0.06530
+Epoch: 229
+Elapsed Time: 0.06592
+Epoch: 230
+Elapsed Time: 0.06631
+Epoch: 231
+Elapsed Time: 0.06769
+Epoch: 232
+Elapsed Time: 0.06603
+Epoch: 233
+Elapsed Time: 0.06704
+Epoch: 234
+Elapsed Time: 0.06547
+Epoch: 235
+Elapsed Time: 0.06430
+Epoch: 236
+Elapsed Time: 0.06609
+Epoch: 237
+Elapsed Time: 0.06654
+Epoch: 238
+Elapsed Time: 0.06268
+Epoch: 239
+Elapsed Time: 0.08349
+Epoch: 240
+Elapsed Time: 0.06606
+Epoch: 241
+Elapsed Time: 0.06639
+Epoch: 242
+Elapsed Time: 0.06538
+Epoch: 243
+Elapsed Time: 0.06387
+Epoch: 244
+Elapsed Time: 0.06442
+Epoch: 245
+Elapsed Time: 0.06396
+Epoch: 246
+Elapsed Time: 0.06450
+Epoch: 247
+Elapsed Time: 0.06419
+Epoch: 248
+Elapsed Time: 0.06366
+Epoch: 249
+Elapsed Time: 0.07860
+Epoch: 250
+Elapsed Time: 0.06494
+Epoch: 251
+Elapsed Time: 0.06357
+Epoch: 252
+Elapsed Time: 0.06649
+Epoch: 253
+Elapsed Time: 0.06505
+Epoch: 254
+Elapsed Time: 0.06558
+Epoch: 255
+Elapsed Time: 0.06397
+Epoch: 256
+Elapsed Time: 0.06573
+Epoch: 257
+Elapsed Time: 0.06339
+Epoch: 258
+Elapsed Time: 0.07839
+Epoch: 259
+Elapsed Time: 0.06503
+Epoch: 260
+Elapsed Time: 0.06699
+Epoch: 261
+Elapsed Time: 0.06408
+Epoch: 262
+Elapsed Time: 0.06441
+Epoch: 263
+Elapsed Time: 0.06380
+Epoch: 264
+Elapsed Time: 0.06514
+Epoch: 265
+Elapsed Time: 0.06400
+Epoch: 266
+Elapsed Time: 0.06517
+Epoch: 267
+Elapsed Time: 0.06952
+Epoch: 268
+Elapsed Time: 0.06054
+Epoch: 269
+Elapsed Time: 0.07273
+Epoch: 270
+Elapsed Time: 0.06358
+Epoch: 271
+Elapsed Time: 0.06480
+Epoch: 272
+Elapsed Time: 0.06356
+Epoch: 273
+Elapsed Time: 0.06601
+Epoch: 274
+Elapsed Time: 0.05910
+Epoch: 275
+Elapsed Time: 0.06489
+Epoch: 276
+Elapsed Time: 0.07752
+Epoch: 277
+Elapsed Time: 0.06349
+Epoch: 278
+Elapsed Time: 0.06564
+Epoch: 279
+Elapsed Time: 0.06570
+Epoch: 280
+Elapsed Time: 0.07611
+Epoch: 281
+Elapsed Time: 0.06461
+Epoch: 282
+Elapsed Time: 0.06595
+Epoch: 283
+Elapsed Time: 0.06515
+Epoch: 284
+Elapsed Time: 0.07469
+Epoch: 285
+Elapsed Time: 0.06540
+Epoch: 286
+Elapsed Time: 0.06411
+Epoch: 287
+Elapsed Time: 0.05987
+Epoch: 288
+Elapsed Time: 0.06381
+Epoch: 289
+Elapsed Time: 0.06553
+Epoch: 290
+Elapsed Time: 0.07976
+Epoch: 291
+Elapsed Time: 0.06663
+Epoch: 292
+Elapsed Time: 0.06445
+Epoch: 293
+Elapsed Time: 0.06634
+Epoch: 294
+Elapsed Time: 0.06450
+Epoch: 295
+Elapsed Time: 0.06636
+Epoch: 296
+Elapsed Time: 0.06466
+Epoch: 297
+Elapsed Time: 0.07651
+Epoch: 298
+Elapsed Time: 0.06549
+Epoch: 299
+Elapsed Time: 0.07647
+Epoch: 300
+Elapsed Time: 0.06512
+Epoch: 301
+Elapsed Time: 0.06561
+Epoch: 302
+Elapsed Time: 0.06505
+Epoch: 303
+Elapsed Time: 0.06703
+Epoch: 304
+Elapsed Time: 0.06561
+Epoch: 305
+Elapsed Time: 0.08057
+Epoch: 306
+Elapsed Time: 0.06123
+Epoch: 307
+Elapsed Time: 0.06707
+Epoch: 308
+Elapsed Time: 0.06449
+Epoch: 309
+Elapsed Time: 0.05788
+Epoch: 310
+Elapsed Time: 0.06730
+Epoch: 311
+Elapsed Time: 0.08282
+Epoch: 312
+Elapsed Time: 0.06202
+Epoch: 313
+Elapsed Time: 0.06658
+Epoch: 314
+Elapsed Time: 0.06578
+Epoch: 315
+Elapsed Time: 0.06478
+Epoch: 316
+Elapsed Time: 0.05904
+Epoch: 317
+Elapsed Time: 0.05838
+Epoch: 318
+Elapsed Time: 0.08379
+Epoch: 319
+Elapsed Time: 0.05951
+Epoch: 320
+Elapsed Time: 0.06010
+Epoch: 321
+Elapsed Time: 0.06645
+Epoch: 322
+Elapsed Time: 0.06211
+Epoch: 323
+Elapsed Time: 0.06464
+Epoch: 324
+Elapsed Time: 0.08263
+Epoch: 325
+Elapsed Time: 0.06683
+Epoch: 326
+Elapsed Time: 0.06290
+Epoch: 327
+Elapsed Time: 0.06536
+Epoch: 328
+Elapsed Time: 0.06548
+Epoch: 329
+Elapsed Time: 0.06907
+Epoch: 330
+Elapsed Time: 0.07065
+Epoch: 331
+Elapsed Time: 0.06620
+Epoch: 332
+Elapsed Time: 0.06796
+Epoch: 333
+Elapsed Time: 0.06651
+Epoch: 334
+Elapsed Time: 0.06384
+Epoch: 335
+Elapsed Time: 0.05974
+Epoch: 336
+Elapsed Time: 0.06593
+Epoch: 337
+Elapsed Time: 0.07975
+Epoch: 338
+Elapsed Time: 0.06581
+Epoch: 339
+Elapsed Time: 0.06689
+Epoch: 340
+Elapsed Time: 0.06553
+Epoch: 341
+Elapsed Time: 0.06548
+Epoch: 342
+Elapsed Time: 0.06646
+Epoch: 343
+Elapsed Time: 0.06608
+Epoch: 344
+Elapsed Time: 0.07522
+Epoch: 345
+Elapsed Time: 0.05832
+Epoch: 346
+Elapsed Time: 0.06036
+Epoch: 347
+Elapsed Time: 0.06544
+Epoch: 348
+Elapsed Time: 0.06432
+Epoch: 349
+Elapsed Time: 0.06496
+Epoch: 350
+Elapsed Time: 0.05788
+Epoch: 351
+Elapsed Time: 0.06535
+Epoch: 352
+Elapsed Time: 0.06725
+Epoch: 353
+Elapsed Time: 0.06109
+Epoch: 354
+Elapsed Time: 0.06051
+Epoch: 355
+Elapsed Time: 0.05968
+Epoch: 356
+Elapsed Time: 0.06569
+Epoch: 357
+Elapsed Time: 0.06495
+Epoch: 358
+Elapsed Time: 0.08024
+Epoch: 359
+Elapsed Time: 0.07430
+Epoch: 360
+Elapsed Time: 0.06901
+Epoch: 361
+Elapsed Time: 0.06258
+Epoch: 362
+Elapsed Time: 0.06629
+Epoch: 363
+Elapsed Time: 0.06270
+Epoch: 364
+Elapsed Time: 0.06546
+Epoch: 365
+Elapsed Time: 0.06863
+Epoch: 366
+Elapsed Time: 0.06450
+Epoch: 367
+Elapsed Time: 0.06290
+Epoch: 368
+Elapsed Time: 0.06476
+Epoch: 369
+Elapsed Time: 0.06395
+Epoch: 370
+Elapsed Time: 0.06617
+Epoch: 371
+Elapsed Time: 0.06525
+Epoch: 372
+Elapsed Time: 0.08033
+Epoch: 373
+Elapsed Time: 0.06462
+Epoch: 374
+Elapsed Time: 0.06583
+Epoch: 375
+Elapsed Time: 0.06486
+Epoch: 376
+Elapsed Time: 0.06477
+Epoch: 377
+Elapsed Time: 0.06499
+Epoch: 378
+Elapsed Time: 0.06448
+Epoch: 379
+Elapsed Time: 0.08171
+Epoch: 380
+Elapsed Time: 0.06649
+Epoch: 381
+Elapsed Time: 0.06547
+Epoch: 382
+Elapsed Time: 0.06457
+Epoch: 383
+Elapsed Time: 0.06419
+Epoch: 384
+Elapsed Time: 0.05966
+Epoch: 385
+Elapsed Time: 0.06014
+Epoch: 386
+Elapsed Time: 0.07028
+Epoch: 387
+Elapsed Time: 0.06505
+Epoch: 388
+Elapsed Time: 0.07691
+Epoch: 389
+Elapsed Time: 0.07165
+Epoch: 390
+Elapsed Time: 0.06122
+Epoch: 391
+Elapsed Time: 0.06250
+Epoch: 392
+Elapsed Time: 0.08495
+Epoch: 393
+Elapsed Time: 0.06695
+Epoch: 394
+Elapsed Time: 0.06566
+Epoch: 395
+Elapsed Time: 0.06536
+Epoch: 396
+Elapsed Time: 0.06477
+Epoch: 397
+Elapsed Time: 0.06808
+Epoch: 398
+Elapsed Time: 0.08219
+Epoch: 399
+Elapsed Time: 0.06812
+Epoch: 400
+Elapsed Time: 0.06788
+Epoch: 401
+Elapsed Time: 0.06528
+Epoch: 402
+Elapsed Time: 0.06487
+Epoch: 403
+Elapsed Time: 0.06436
+Epoch: 404
+Elapsed Time: 0.06395
+Epoch: 405
+Elapsed Time: 0.09191
+Epoch: 406
+Elapsed Time: 0.06468
+Epoch: 407
+Elapsed Time: 0.06447
+Epoch: 408
+Elapsed Time: 0.06472
+Epoch: 409
+Elapsed Time: 0.06462
+Epoch: 410
+Elapsed Time: 0.06509
+Epoch: 411
+Elapsed Time: 0.06496
+Epoch: 412
+Elapsed Time: 0.07080
+Epoch: 413
+Elapsed Time: 0.06752
+Epoch: 414
+Elapsed Time: 0.06528
+Epoch: 415
+Elapsed Time: 0.06423
+Epoch: 416
+Elapsed Time: 0.06673
+Epoch: 417
+Elapsed Time: 0.06632
+Epoch: 418
+Elapsed Time: 0.08253
+Epoch: 419
+Elapsed Time: 0.07521
+Epoch: 420
+Elapsed Time: 0.06641
+Epoch: 421
+Elapsed Time: 0.06481
+Epoch: 422
+Elapsed Time: 0.06557
+Epoch: 423
+Elapsed Time: 0.06584
+Epoch: 424
+Elapsed Time: 0.07361
+Epoch: 425
+Elapsed Time: 0.06905
+Epoch: 426
+Elapsed Time: 0.05989
+Epoch: 427
+Elapsed Time: 0.06947
+Epoch: 428
+Elapsed Time: 0.06755
+Epoch: 429
+Elapsed Time: 0.08514
+Epoch: 430
+Elapsed Time: 0.06426
+Epoch: 431
+Elapsed Time: 0.06770
+Epoch: 432
+Elapsed Time: 0.06551
+Epoch: 433
+Elapsed Time: 0.06504
+Epoch: 434
+Elapsed Time: 0.06536
+Epoch: 435
+Elapsed Time: 0.06549
+Epoch: 436
+Elapsed Time: 0.06576
+Epoch: 437
+Elapsed Time: 0.07588
+Epoch: 438
+Elapsed Time: 0.06843
+Epoch: 439
+Elapsed Time: 0.06748
+Epoch: 440
+Elapsed Time: 0.06560
+Epoch: 441
+Elapsed Time: 0.06539
+Epoch: 442
+Elapsed Time: 0.06408
+Epoch: 443
+Elapsed Time: 0.06448
+Epoch: 444
+Elapsed Time: 0.06501
+Epoch: 445
+Elapsed Time: 0.07926
+Epoch: 446
+Elapsed Time: 0.06717
+Epoch: 447
+Elapsed Time: 0.06612
+Epoch: 448
+Elapsed Time: 0.06527
+Epoch: 449
+Elapsed Time: 0.07333
+Epoch: 450
+Elapsed Time: 0.06397
+Epoch: 451
+Elapsed Time: 0.06444
+Epoch: 452
+Elapsed Time: 0.06091
+Epoch: 453
+Elapsed Time: 0.06505
+Epoch: 454
+Elapsed Time: 0.08294
+Epoch: 455
+Elapsed Time: 0.06509
+Epoch: 456
+Elapsed Time: 0.06563
+Epoch: 457
+Elapsed Time: 0.06543
+Epoch: 458
+Elapsed Time: 0.06516
+Epoch: 459
+Elapsed Time: 0.06583
+Epoch: 460
+Elapsed Time: 0.06688
+Epoch: 461
+Elapsed Time: 0.08283
+Epoch: 462
+Elapsed Time: 0.06421
+Epoch: 463
+Elapsed Time: 0.06309
+Epoch: 464
+Elapsed Time: 0.06199
+Epoch: 465
+Elapsed Time: 0.06552
+Epoch: 466
+Elapsed Time: 0.06473
+Epoch: 467
+Elapsed Time: 0.06450
+Epoch: 468
+Elapsed Time: 0.07868
+Epoch: 469
+Elapsed Time: 0.06669
+Epoch: 470
+Elapsed Time: 0.06730
+Epoch: 471
+Elapsed Time: 0.06661
+Epoch: 472
+Elapsed Time: 0.06619
+Epoch: 473
+Elapsed Time: 0.06670
+Epoch: 474
+Elapsed Time: 0.06465
+Epoch: 475
+Elapsed Time: 0.06667
+Epoch: 476
+Elapsed Time: 0.07926
+Epoch: 477
+Elapsed Time: 0.06563
+Epoch: 478
+Elapsed Time: 0.06668
+Epoch: 479
+Elapsed Time: 0.07054
+Epoch: 480
+Elapsed Time: 0.06766
+Epoch: 481
+Elapsed Time: 0.06420
+Epoch: 482
+Elapsed Time: 0.06414
+Epoch: 483
+Elapsed Time: 0.06474
+Epoch: 484
+Elapsed Time: 0.06451
+Epoch: 485
+Elapsed Time: 0.08099
+Epoch: 486
+Elapsed Time: 0.06554
+Epoch: 487
+Elapsed Time: 0.06560
+Epoch: 488
+Elapsed Time: 0.06485
+Epoch: 489
+Elapsed Time: 0.06046
+Epoch: 490
+Elapsed Time: 0.06644
+Epoch: 491
+Elapsed Time: 0.06458
+Epoch: 492
+Elapsed Time: 0.06524
+Epoch: 493
+Elapsed Time: 0.07941
+Epoch: 494
+Elapsed Time: 0.06554
+Epoch: 495
+Elapsed Time: 0.06696
+Epoch: 496
+Elapsed Time: 0.06365
+Epoch: 497
+Elapsed Time: 0.06450
+Epoch: 498
+Elapsed Time: 0.06450
+Epoch: 499
+Elapsed Time: 0.07720
+Epoch: 500
+Elapsed Time: 0.08361
+Epoch: 501
+Elapsed Time: 0.06650
+Epoch: 502
+Elapsed Time: 0.06673
+Epoch: 503
+Elapsed Time: 0.06460
+Epoch: 504
+Elapsed Time: 0.06340
+Epoch: 505
+Elapsed Time: 0.06477
+Epoch: 506
+Elapsed Time: 0.06470
+Epoch: 507
+Elapsed Time: 0.07704
+Epoch: 508
+Elapsed Time: 0.06628
+Epoch: 509
+Elapsed Time: 0.07940
+Epoch: 510
+Elapsed Time: 0.06521
+Epoch: 511
+Elapsed Time: 0.06450
+Epoch: 512
+Elapsed Time: 0.06599
+Epoch: 513
+Elapsed Time: 0.06421
+Epoch: 514
+Elapsed Time: 0.07522
+Epoch: 515
+Elapsed Time: 0.06602
+Epoch: 516
+Elapsed Time: 0.06537
+Epoch: 517
+Elapsed Time: 0.06404
+Epoch: 518
+Elapsed Time: 0.05881
+Epoch: 519
+Elapsed Time: 0.06413
+Epoch: 520
+Elapsed Time: 0.06636
+Epoch: 521
+Elapsed Time: 0.05897
+Epoch: 522
+Elapsed Time: 0.05923
+Epoch: 523
+Elapsed Time: 0.07565
+Epoch: 524
+Elapsed Time: 0.06199
+Epoch: 525
+Elapsed Time: 0.05982
+Epoch: 526
+Elapsed Time: 0.06382
+Epoch: 527
+Elapsed Time: 0.06120
+Epoch: 528
+Elapsed Time: 0.06564
+Epoch: 529
+Elapsed Time: 0.06530
+Epoch: 530
+Elapsed Time: 0.08188
+Epoch: 531
+Elapsed Time: 0.06585
+Epoch: 532
+Elapsed Time: 0.06708
+Epoch: 533
+Elapsed Time: 0.06481
+Epoch: 534
+Elapsed Time: 0.06415
+Epoch: 535
+Elapsed Time: 0.06448
+Epoch: 536
+Elapsed Time: 0.06407
+Epoch: 537
+Elapsed Time: 0.05999
+Epoch: 538
+Elapsed Time: 0.07831
+Epoch: 539
+Elapsed Time: 0.07371
+Epoch: 540
+Elapsed Time: 0.06516
+Epoch: 541
+Elapsed Time: 0.06611
+Epoch: 542
+Elapsed Time: 0.06456
+Epoch: 543
+Elapsed Time: 0.06504
+Epoch: 544
+Elapsed Time: 0.06443
+Epoch: 545
+Elapsed Time: 0.06587
+Epoch: 546
+Elapsed Time: 0.06551
+Epoch: 547
+Elapsed Time: 0.07619
+Epoch: 548
+Elapsed Time: 0.06660
+Epoch: 549
+Elapsed Time: 0.06454
+Epoch: 550
+Elapsed Time: 0.07384
+Epoch: 551
+Elapsed Time: 0.06424
+Epoch: 552
+Elapsed Time: 0.06489
+Epoch: 553
+Elapsed Time: 0.06604
+Epoch: 554
+Elapsed Time: 0.07501
+Epoch: 555
+Elapsed Time: 0.06086
+Epoch: 556
+Elapsed Time: 0.06496
+Epoch: 557
+Elapsed Time: 0.06119
+Epoch: 558
+Elapsed Time: 0.06398
+Epoch: 559
+Elapsed Time: 0.05823
+Epoch: 560
+Elapsed Time: 0.06500
+Epoch: 561
+Elapsed Time: 0.08333
+Epoch: 562
+Elapsed Time: 0.06630
+Epoch: 563
+Elapsed Time: 0.06698
+Epoch: 564
+Elapsed Time: 0.06432
+Epoch: 565
+Elapsed Time: 0.06529
+Epoch: 566
+Elapsed Time: 0.06519
+Epoch: 567
+Elapsed Time: 0.06468
+Epoch: 568
+Elapsed Time: 0.06494
+Epoch: 569
+Elapsed Time: 0.08721
+Epoch: 570
+Elapsed Time: 0.06601
+Epoch: 571
+Elapsed Time: 0.06729
+Epoch: 572
+Elapsed Time: 0.06626
+Epoch: 573
+Elapsed Time: 0.06590
+Epoch: 574
+Elapsed Time: 0.06403
+Epoch: 575
+Elapsed Time: 0.06518
+Epoch: 576
+Elapsed Time: 0.08002
+Epoch: 577
+Elapsed Time: 0.06602
+Epoch: 578
+Elapsed Time: 0.06730
+Epoch: 579
+Elapsed Time: 0.06566
+Epoch: 580
+Elapsed Time: 0.06409
+Epoch: 581
+Elapsed Time: 0.06070
+Epoch: 582
+Elapsed Time: 0.06544
+Epoch: 583
+Elapsed Time: 0.08076
+Epoch: 584
+Elapsed Time: 0.06709
+Epoch: 585
+Elapsed Time: 0.06761
+Epoch: 586
+Elapsed Time: 0.06460
+Epoch: 587
+Elapsed Time: 0.06518
+Epoch: 588
+Elapsed Time: 0.06367
+Epoch: 589
+Elapsed Time: 0.06485
+Epoch: 590
+Elapsed Time: 0.08009
+Epoch: 591
+Elapsed Time: 0.06530
+Epoch: 592
+Elapsed Time: 0.06566
+Epoch: 593
+Elapsed Time: 0.06627
+Epoch: 594
+Elapsed Time: 0.06493
+Epoch: 595
+Elapsed Time: 0.06601
+Epoch: 596
+Elapsed Time: 0.07470
+Epoch: 597
+Elapsed Time: 0.06550
+Epoch: 598
+Elapsed Time: 0.06575
+Epoch: 599
+Elapsed Time: 0.06919
+Epoch: 600
+Elapsed Time: 0.06102
+Epoch: 601
+Elapsed Time: 0.06550
+Epoch: 602
+Elapsed Time: 0.08297
+Epoch: 603
+Elapsed Time: 0.06239
+Epoch: 604
+Elapsed Time: 0.06243
+Epoch: 605
+Elapsed Time: 0.06070
+Epoch: 606
+Elapsed Time: 0.06318
+Epoch: 607
+Elapsed Time: 0.06620
+Epoch: 608
+Elapsed Time: 0.06432
+Epoch: 609
+Elapsed Time: 0.07555
+Epoch: 610
+Elapsed Time: 0.06685
+Epoch: 611
+Elapsed Time: 0.06478
+Epoch: 612
+Elapsed Time: 0.06344
+Epoch: 613
+Elapsed Time: 0.06518
+Epoch: 614
+Elapsed Time: 0.06157
+Epoch: 615
+Elapsed Time: 0.06630
+Epoch: 616
+Elapsed Time: 0.08070
+Epoch: 617
+Elapsed Time: 0.06699
+Epoch: 618
+Elapsed Time: 0.06645
+Epoch: 619
+Elapsed Time: 0.06231
+Epoch: 620
+Elapsed Time: 0.05806
+Epoch: 621
+Elapsed Time: 0.06447
+Epoch: 622
+Elapsed Time: 0.06333
+Epoch: 623
+Elapsed Time: 0.07925
+Epoch: 624
+Elapsed Time: 0.06590
+Epoch: 625
+Elapsed Time: 0.06580
+Epoch: 626
+Elapsed Time: 0.06558
+Epoch: 627
+Elapsed Time: 0.06301
+Epoch: 628
+Elapsed Time: 0.06540
+Epoch: 629
+Elapsed Time: 0.07285
+Epoch: 630
+Elapsed Time: 0.08103
+Epoch: 631
+Elapsed Time: 0.06594
+Epoch: 632
+Elapsed Time: 0.06647
+Epoch: 633
+Elapsed Time: 0.06437
+Epoch: 634
+Elapsed Time: 0.06280
+Epoch: 635
+Elapsed Time: 0.06425
+Epoch: 636
+Elapsed Time: 0.06442
+Epoch: 637
+Elapsed Time: 0.07426
+Epoch: 638
+Elapsed Time: 0.06598
+Epoch: 639
+Elapsed Time: 0.06779
+Epoch: 640
+Elapsed Time: 0.06518
+Epoch: 641
+Elapsed Time: 0.06346
+Epoch: 642
+Elapsed Time: 0.06490
+Epoch: 643
+Elapsed Time: 0.06642
+Epoch: 644
+Elapsed Time: 0.06557
+Epoch: 645
+Elapsed Time: 0.07690
+Epoch: 646
+Elapsed Time: 0.06562
+Epoch: 647
+Elapsed Time: 0.06497
+Epoch: 648
+Elapsed Time: 0.06545
+Epoch: 649
+Elapsed Time: 0.06594
+Epoch: 650
+Elapsed Time: 0.06356
+Epoch: 651
+Elapsed Time: 0.06401
+Epoch: 652
+Elapsed Time: 0.06489
+Epoch: 653
+Elapsed Time: 0.06537
+Epoch: 654
+Elapsed Time: 0.06199
+Epoch: 655
+Elapsed Time: 0.07174
+Epoch: 656
+Elapsed Time: 0.05895
+Epoch: 657
+Elapsed Time: 0.05950
+Epoch: 658
+Elapsed Time: 0.06195
+Epoch: 659
+Elapsed Time: 0.07253
+Epoch: 660
+Elapsed Time: 0.06486
+Epoch: 661
+Elapsed Time: 0.06386
+Epoch: 662
+Elapsed Time: 0.06497
+Epoch: 663
+Elapsed Time: 0.07923
+Epoch: 664
+Elapsed Time: 0.06612
+Epoch: 665
+Elapsed Time: 0.06700
+Epoch: 666
+Elapsed Time: 0.06066
+Epoch: 667
+Elapsed Time: 0.06077
+Epoch: 668
+Elapsed Time: 0.05916
+Epoch: 669
+Elapsed Time: 0.06217
+Epoch: 670
+Elapsed Time: 0.06408
+Epoch: 671
+Elapsed Time: 0.06618
+Epoch: 672
+Elapsed Time: 0.06848
+Epoch: 673
+Elapsed Time: 0.06600
+Epoch: 674
+Elapsed Time: 0.06624
+Epoch: 675
+Elapsed Time: 0.06593
+Epoch: 676
+Elapsed Time: 0.06480
+Epoch: 677
+Elapsed Time: 0.06552
+Epoch: 678
+Elapsed Time: 0.06549
+Epoch: 679
+Elapsed Time: 0.07730
+Epoch: 680
+Elapsed Time: 0.06363
+Epoch: 681
+Elapsed Time: 0.06504
+Epoch: 682
+Elapsed Time: 0.06483
+Epoch: 683
+Elapsed Time: 0.06655
+Epoch: 684
+Elapsed Time: 0.06503
+Epoch: 685
+Elapsed Time: 0.06412
+Epoch: 686
+Elapsed Time: 0.08327
+Epoch: 687
+Elapsed Time: 0.06439
+Epoch: 688
+Elapsed Time: 0.06636
+Epoch: 689
+Elapsed Time: 0.07390
+Epoch: 690
+Elapsed Time: 0.06345
+Epoch: 691
+Elapsed Time: 0.06256
+Epoch: 692
+Elapsed Time: 0.06147
+Epoch: 693
+Elapsed Time: 0.06140
+Epoch: 694
+Elapsed Time: 0.07941
+Epoch: 695
+Elapsed Time: 0.05892
+Epoch: 696
+Elapsed Time: 0.06645
+Epoch: 697
+Elapsed Time: 0.05923
+Epoch: 698
+Elapsed Time: 0.06635
+Epoch: 699
+Elapsed Time: 0.07004
+Epoch: 700
+Elapsed Time: 0.08313
+Epoch: 701
+Elapsed Time: 0.06508
+Epoch: 702
+Elapsed Time: 0.06644
+Epoch: 703
+Elapsed Time: 0.06522
+Epoch: 704
+Elapsed Time: 0.06612
+Epoch: 705
+Elapsed Time: 0.06834
+Epoch: 706
+Elapsed Time: 0.06486
+Epoch: 707
+Elapsed Time: 0.07586
+Epoch: 708
+Elapsed Time: 0.05802
+Epoch: 709
+Elapsed Time: 0.05923
+Epoch: 710
+Elapsed Time: 0.06343
+Epoch: 711
+Elapsed Time: 0.06323
+Epoch: 712
+Elapsed Time: 0.06571
+Epoch: 713
+Elapsed Time: 0.06509
+Epoch: 714
+Elapsed Time: 0.08467
+Epoch: 715
+Elapsed Time: 0.06496
+Epoch: 716
+Elapsed Time: 0.06654
+Epoch: 717
+Elapsed Time: 0.06491
+Epoch: 718
+Elapsed Time: 0.06391
+Epoch: 719
+Elapsed Time: 0.07287
+Epoch: 720
+Elapsed Time: 0.05901
+Epoch: 721
+Elapsed Time: 0.08002
+Epoch: 722
+Elapsed Time: 0.06465
+Epoch: 723
+Elapsed Time: 0.06418
+Epoch: 724
+Elapsed Time: 0.06613
+Epoch: 725
+Elapsed Time: 0.06318
+Epoch: 726
+Elapsed Time: 0.06329
+Epoch: 727
+Elapsed Time: 0.07765
+Epoch: 728
+Elapsed Time: 0.06486
+Epoch: 729
+Elapsed Time: 0.06394
+Epoch: 730
+Elapsed Time: 0.06534
+Epoch: 731
+Elapsed Time: 0.06668
+Epoch: 732
+Elapsed Time: 0.06431
+Epoch: 733
+Elapsed Time: 0.06529
+Epoch: 734
+Elapsed Time: 0.07689
+Epoch: 735
+Elapsed Time: 0.06558
+Epoch: 736
+Elapsed Time: 0.06797
+Epoch: 737
+Elapsed Time: 0.06538
+Epoch: 738
+Elapsed Time: 0.05853
+Epoch: 739
+Elapsed Time: 0.06529
+Epoch: 740
+Elapsed Time: 0.06692
+Epoch: 741
+Elapsed Time: 0.07633
+Epoch: 742
+Elapsed Time: 0.06684
+Epoch: 743
+Elapsed Time: 0.06616
+Epoch: 744
+Elapsed Time: 0.06431
+Epoch: 745
+Elapsed Time: 0.06479
+Epoch: 746
+Elapsed Time: 0.06648
+Epoch: 747
+Elapsed Time: 0.07183
+Epoch: 748
+Elapsed Time: 0.06378
+Epoch: 749
+Elapsed Time: 0.07930
+Epoch: 750
+Elapsed Time: 0.06439
+Epoch: 751
+Elapsed Time: 0.06563
+Epoch: 752
+Elapsed Time: 0.06506
+Epoch: 753
+Elapsed Time: 0.06361
+Epoch: 754
+Elapsed Time: 0.08206
+Epoch: 755
+Elapsed Time: 0.06627
+Epoch: 756
+Elapsed Time: 0.06220
+Epoch: 757
+Elapsed Time: 0.05856
+Epoch: 758
+Elapsed Time: 0.06445
+Epoch: 759
+Elapsed Time: 0.06379
+Epoch: 760
+Elapsed Time: 0.06511
+Epoch: 761
+Elapsed Time: 0.07807
+Epoch: 762
+Elapsed Time: 0.06479
+Epoch: 763
+Elapsed Time: 0.06283
+Epoch: 764
+Elapsed Time: 0.06583
+Epoch: 765
+Elapsed Time: 0.05764
+Epoch: 766
+Elapsed Time: 0.05954
+Epoch: 767
+Elapsed Time: 0.08643
+Epoch: 768
+Elapsed Time: 0.06579
+Epoch: 769
+Elapsed Time: 0.06633
+Epoch: 770
+Elapsed Time: 0.06375
+Epoch: 771
+Elapsed Time: 0.06374
+Epoch: 772

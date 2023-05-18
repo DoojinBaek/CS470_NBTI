@@ -150,13 +150,23 @@ class Classifier_CNN(torch.nn.Module):
             torch.nn.SiLU(),
             torch.nn.Dropout2d(0.2)
         )
-        self.layer6 = torch.nn.Sequential(
+        self.layer5 = torch.nn.Sequential(
             torch.nn.Conv2d(256, 512, kernel_size=2),
-            torch.nn.BatchNorm2d(512),
-            torch.nn.SiLU()
+            torch.nn.BatchNorm2d(256),
+            torch.nn.SiLU(),
+            torch.nn.Dropout2d(0.1)
+        )
+        self.layer5 = torch.nn.Sequential(
+            torch.nn.Conv2d(512, 1024, kernel_size=2),
+            torch.nn.BatchNorm2d(256),
+            torch.nn.SiLU(),
+            torch.nn.Dropout2d(0.1)
         )
         self.layer7 = torch.nn.Sequential(
-            torch.nn.Linear(8192, 512),
+            torch.nn.Linear(6400, 1024),
+            torch.nn.BatchNorm1d(1024),
+            torch.nn.SiLU(),
+            torch.nn.Linear(1024, 512),
             torch.nn.BatchNorm1d(512),
             torch.nn.SiLU(),
             torch.nn.Linear(512, 256),
@@ -175,7 +185,6 @@ class Classifier_CNN(torch.nn.Module):
         x = self.layer3(x)
         x = self.layer4(x)
         x = self.layer5(x)
-        x = self.layer6(x)
         x = x.reshape(x.shape[0], -1)
         out = self.layer7(x)
 
@@ -186,8 +195,8 @@ class Classifier_CNN(torch.nn.Module):
 def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = optimizer, mode='min', factor = 0.1, patience = 40, 
-                                                           threshold=0.00001)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = optimizer, mode='min', factor = 0.5, patience = 40, 
+                                                           threshold=0.0001)
     val_loss_min = np.inf
     val_acc_max = -np.inf
 
