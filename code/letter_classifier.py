@@ -121,7 +121,10 @@ class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.Conv2d(1, 32, kernel_size = 4),
+            torch.nn.Conv2d(1, 52, kernel_size = 1),
+            torch.nn.BatchNorm2d(52),
+            torch.nn.SiLU(),
+            torch.nn.Conv2d(52, 32, kernel_size = 4),
             torch.nn.BatchNorm2d(32),
             torch.nn.SiLU(),
             torch.nn.MaxPool2d(kernel_size=2)
