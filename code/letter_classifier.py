@@ -28,9 +28,6 @@ if len(sys.argv) != 2:
 def invert(image):
     return transforms.functional.invert(image)
 
-def constrast(image):
-    return transforms.functional.adjust_contrast(image, 2)
-
 def cal_acc(pred, label):
     '''
     pred: batch_size x 52 with probabilities
@@ -49,6 +46,7 @@ def cal_acc(pred, label):
 def calculate_val_loss_and_acc(model, loss_fn, dataloader):
     loss_buffer = []
     acc_buffer = []
+    model.eval()
     with torch.no_grad():
         for idx, (data, label) in enumerate(dataloader):
             data = data.to(device)
@@ -68,16 +66,13 @@ def create_datasets(batch_size):
 
     train_transform = transforms.Compose([
     transforms.Grayscale(1),
-    transforms.Resize((28, 28)),
-    transforms.RandomRotation([-30, 30], fill=255),
-    transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=255),
-    transforms.Lambda(invert),
-    transforms.Lambda(constrast),
+    transforms.RandomRotation([-30, 30], fill=0),
+    transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=0),
     transforms.ToTensor()
 ])
 
     # choose the training and test datasets
-    train_data = datasets.ImageFolder(os.path.join(data_dir, 'data/letter_classifier'), train_transform)
+    train_data = datasets.ImageFolder(os.path.join(data_dir, 'data/Images/Images/'), train_transform)
 
     # trainning set 중 validation 데이터로 사용할 비율
     valid_size = 0.2
@@ -116,43 +111,38 @@ def imshow(input, title):
     plt.imshow(input)
     plt.title(title)
     plt.show()
-    
-class LetterNet(torch.nn.Module):
-    def __init__(self, input_size, output_size, kernel_size = 2):
-        super(LetterNet, self).__init__()
-        self.layer = torch.nn.Sequential(
-            torch.nn.Conv2d(input_size, output_size, kernel_size=kernel_size),
-            torch.nn.BatchNorm2d(output_size),
-            torch.nn.GELU(),
-            torch.nn.Conv2d(output_size, output_size, kernel_size=1),
-            torch.nn.BatchNorm2d(output_size),
-            torch.nn.GELU(),
-        )
-    def forward(self, x):
-        return self.layer(x)
 
 class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            LetterNet(1, 52, 4),
-            torch.nn.MaxPool2d(2),
-            LetterNet(52, 104, 4),
-            LetterNet(104, 208, 3),
-            LetterNet(208, 516, 3),
-            LetterNet(516, 1024),
-            LetterNet(1024, 2048),
-            LetterNet(2048, 2048),
-            LetterNet(2048, 4096),
+            torch.nn.Conv2d(1, 16, kernel_size = 4),
+            torch.nn.BatchNorm2d(16),
+            torch.nn.SiLU(),
+            torch.nn.Dropout2d(0.2),
+            torch.nn.MaxPool2d(kernel_size=2)
+        )
+        self.layer2 = torch.nn.Sequential(
+            torch.nn.Conv2d(16, 32, kernel_size=3),
+            torch.nn.BatchNorm2d(32),
+            torch.nn.SiLU(),
+            torch.nn.Dropout2d(0.2),
+            torch.nn.MaxPool2d(kernel_size=2)
+        )
+        self.layer3 = torch.nn.Sequential(
+            torch.nn.Conv2d(32, 64, kernel_size=3),
+            torch.nn.BatchNorm2d(64),
+            torch.nn.SiLU(),
+            torch.nn.Dropout2d(0.2),
+        )
+        self.layer4 = torch.nn.Sequential(
+            torch.nn.Conv2d(64, 128, kernel_size=2),
+            torch.nn.BatchNorm2d(128),
+            torch.nn.SiLU(),
+            torch.nn.Dropout2d(0.2),
         )
         self.linear_layer = torch.nn.Sequential(
-            torch.nn.Linear(4096, 2048),
-            torch.nn.BatchNorm1d(2048),
-            torch.nn.SiLU(),
-            torch.nn.Linear(2048, 1024),
-            torch.nn.BatchNorm1d(1024),
-            torch.nn.SiLU(),
-            torch.nn.Linear(1024, 512),
+            torch.nn.Linear(1152, 512),
             torch.nn.BatchNorm1d(512),
             torch.nn.SiLU(),
             torch.nn.Linear(512, 256),
@@ -165,7 +155,11 @@ class Classifier_CNN(torch.nn.Module):
         )
     
     def forward(self, x):
+
         x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
         x = x.reshape(x.shape[0], -1)
         out = self.linear_layer(x)
 
@@ -175,7 +169,9 @@ class Classifier_CNN(torch.nn.Module):
 ########## Training Code ##########
 def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), betas=(0.9, 0.999), lr = learning_rate, weight_decay=0.05)
+    optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = optimizer, mode='min', factor = 0.1, patience = 40, 
+                                                           threshold=0.00001)
     val_loss_min = np.inf
     val_acc_max = -np.inf
 
@@ -189,7 +185,7 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     valid_loss_buffer.append(val_loss)
     valid_acc_buffer.append(val_acc)
     
-    print(summary(model, (1, 28, 28)))
+    print(summary(model, (1, 32, 32)))
     
     for epoch in range(num_epochs):
         
@@ -197,6 +193,7 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
         train_acc_buffer_tmp = []
         print('Epoch: {}'.format(epoch))
         start = time.time()
+        model.train()
         for idx, (data, label) in enumerate(train_dataloader):
 
             data = data.to(device)
@@ -218,7 +215,7 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
         valid_acc_buffer.append(val_acc)
         train_loss_buffer.append(np.mean(train_loss_buffer_tmp))
         train_acc_buffer.append(np.mean(train_acc_buffer_tmp))
-
+        scheduler.step(val_loss)
         if val_loss < val_loss_min:
             print('new minimum validation loss:', val_loss)
             val_loss_min = val_loss
@@ -266,9 +263,9 @@ def logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, tra
 if __name__ == '__main__':
     
     device = 'cuda'
-    batch_size = 64
-    num_epochs = 5000
-    learning_rate = 0.004
+    batch_size = 32
+    num_epochs = 100
+    learning_rate = 0.01
     os.makedirs('./logs/{}/'.format(exp_idx), exist_ok=True)
     os.makedirs('./checkpoints/{}/'.format(exp_idx), exist_ok=True)
 
