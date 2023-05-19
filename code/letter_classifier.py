@@ -28,6 +28,9 @@ if len(sys.argv) != 2:
 def invert(image):
     return transforms.functional.invert(image)
 
+def constrast(image):
+    return transforms.functional.adjust_contrast(image, 2)
+
 def cal_acc(pred, label):
     '''
     pred: batch_size x 52 with probabilities
@@ -65,10 +68,11 @@ def create_datasets(batch_size):
 
     train_transform = transforms.Compose([
     transforms.Grayscale(1),
-    transforms.Resize((56, 56)),
+    transforms.Resize((28, 28)),
     transforms.RandomRotation([-30, 30], fill=255),
     transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=255),
     transforms.Lambda(invert),
+    transforms.Lambda(constrast),
     transforms.ToTensor()
 ])
 
@@ -76,7 +80,7 @@ def create_datasets(batch_size):
     train_data = datasets.ImageFolder(os.path.join(data_dir, 'data/letter_classifier'), train_transform)
 
     # trainning set 중 validation 데이터로 사용할 비율
-    valid_size = 0.3
+    valid_size = 0.2
 
     # validation으로 사용할 trainning indices를 얻는다.
     num_train = len(train_data)
@@ -117,32 +121,37 @@ class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.Conv2d(1, 8, kernel_size = 2),
-            torch.nn.BatchNorm2d(8),
+            torch.nn.Conv2d(1, 32, kernel_size = 4),
+            torch.nn.BatchNorm2d(32),
             torch.nn.SiLU(),
             torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer2 = torch.nn.Sequential(
-            torch.nn.Conv2d(8, 16, kernel_size=2),
-            torch.nn.BatchNorm2d(16),
+            torch.nn.Conv2d(32, 64, kernel_size=3),
+            torch.nn.BatchNorm2d(64),
             torch.nn.SiLU(),
             torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer3 = torch.nn.Sequential(
-            torch.nn.Conv2d(16, 32, kernel_size=2),
-            torch.nn.BatchNorm2d(32),
+            torch.nn.Conv2d(64, 128, kernel_size=2),
+            torch.nn.BatchNorm2d(128),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
-            torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer4 = torch.nn.Sequential(
-            torch.nn.Conv2d(32, 64, kernel_size=2),
-            torch.nn.BatchNorm2d(64),
+            torch.nn.Conv2d(128, 256, kernel_size=2),
+            torch.nn.BatchNorm2d(256),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
+        )
+        self.layer5 = torch.nn.Sequential(
+            torch.nn.Conv2d(256, 512, kernel_size=2),
+            torch.nn.BatchNorm2d(512),
+            torch.nn.SiLU(),
         )
         self.linear_layer = torch.nn.Sequential(
-            torch.nn.Linear(1600, 512),
+            torch.nn.Linear(2048, 1024),
+            torch.nn.BatchNorm1d(1024),
+            torch.nn.SiLU(),
+            torch.nn.Linear(1024, 512),
             torch.nn.BatchNorm1d(512),
             torch.nn.SiLU(),
             torch.nn.Linear(512, 256),
@@ -160,6 +169,7 @@ class Classifier_CNN(torch.nn.Module):
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
+        x = self.layer5(x)
         x = x.reshape(x.shape[0], -1)
         out = self.linear_layer(x)
 
@@ -170,8 +180,8 @@ class Classifier_CNN(torch.nn.Module):
 def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = optimizer, mode='min', factor = 0.5, patience = 40, 
-                                                           threshold=0.0001)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = optimizer, mode='min', factor = 0.5, patience = 30, 
+                                                           min_lr=0.00001)
     val_loss_min = np.inf
     val_acc_max = -np.inf
 
@@ -185,7 +195,7 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     valid_loss_buffer.append(val_loss)
     valid_acc_buffer.append(val_acc)
     
-    print(summary(model, (1, 56, 56)))
+    print(summary(model, (1, 28, 28)))
     
     for epoch in range(num_epochs):
         
@@ -265,7 +275,7 @@ if __name__ == '__main__':
     device = 'cuda'
     batch_size = 64
     num_epochs = 5000
-    learning_rate = 0.01
+    learning_rate = 0.001
     os.makedirs('./logs/{}/'.format(exp_idx), exist_ok=True)
     os.makedirs('./checkpoints/{}/'.format(exp_idx), exist_ok=True)
 
