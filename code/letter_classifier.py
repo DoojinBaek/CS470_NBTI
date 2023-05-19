@@ -116,41 +116,39 @@ def imshow(input, title):
     plt.imshow(input)
     plt.title(title)
     plt.show()
+    
+class LetterNet(torch.nn.Module):
+    def __init__(self, input_size, output_size, kernel_size = 2):
+        super(LetterNet, self).__init__()
+        self.layer = torch.nn.Sequential(
+            torch.nn.Conv2d(input_size, output_size, kernel_size=kernel_size),
+            torch.nn.BatchNorm2d(output_size),
+            torch.nn.GELU(),
+            torch.nn.Conv2d(output_size, output_size, kernel_size=1),
+            torch.nn.BatchNorm2d(output_size),
+            torch.nn.GELU(),
+        )
+    def forward(self, x):
+        return self.layer(x)
 
 class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.Conv2d(1, 52, kernel_size = 1),
-            torch.nn.BatchNorm2d(52),
-            torch.nn.SiLU(),
-            torch.nn.Conv2d(52, 32, kernel_size = 4),
-            torch.nn.BatchNorm2d(32),
-            torch.nn.SiLU(),
-            torch.nn.MaxPool2d(kernel_size=2)
-        )
-        self.layer2 = torch.nn.Sequential(
-            torch.nn.Conv2d(32, 64, kernel_size=3),
-            torch.nn.BatchNorm2d(64),
-            torch.nn.SiLU(),
-            torch.nn.MaxPool2d(kernel_size=2)
-        )
-        self.layer3 = torch.nn.Sequential(
-            torch.nn.Conv2d(64, 128, kernel_size=2),
-            torch.nn.BatchNorm2d(128),
-            torch.nn.SiLU(),
-        )
-        self.layer4 = torch.nn.Sequential(
-            torch.nn.Conv2d(128, 256, kernel_size=2),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.SiLU(),
-        )
-        self.layer5 = torch.nn.Sequential(
-            torch.nn.Conv2d(256, 512, kernel_size=2),
-            torch.nn.BatchNorm2d(512),
-            torch.nn.SiLU(),
+            LetterNet(1, 52, 4),
+            torch.nn.MaxPool2d(2),
+            LetterNet(52, 104, 4),
+            LetterNet(104, 208, 3),
+            LetterNet(208, 516, 3),
+            LetterNet(516, 1024),
+            LetterNet(1024, 2048),
+            LetterNet(2048, 2048),
+            LetterNet(2048, 4096),
         )
         self.linear_layer = torch.nn.Sequential(
+            torch.nn.Linear(4096, 2048),
+            torch.nn.BatchNorm1d(2048),
+            torch.nn.SiLU(),
             torch.nn.Linear(2048, 1024),
             torch.nn.BatchNorm1d(1024),
             torch.nn.SiLU(),
@@ -167,12 +165,7 @@ class Classifier_CNN(torch.nn.Module):
         )
     
     def forward(self, x):
-
         x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
-        x = self.layer5(x)
         x = x.reshape(x.shape[0], -1)
         out = self.linear_layer(x)
 
@@ -182,9 +175,7 @@ class Classifier_CNN(torch.nn.Module):
 ########## Training Code ##########
 def train(model, learning_rate, train_dataloader, valid_dataloader, device):
     loss_fn = torch.nn.CrossEntropyLoss().to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer = optimizer, mode='min', factor = 0.5, patience = 30, 
-                                                           min_lr=0.00001)
+    optimizer = torch.optim.AdamW(model.parameters(), betas=(0.9, 0.999), lr = learning_rate, weight_decay=0.05)
     val_loss_min = np.inf
     val_acc_max = -np.inf
 
@@ -227,7 +218,6 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
         valid_acc_buffer.append(val_acc)
         train_loss_buffer.append(np.mean(train_loss_buffer_tmp))
         train_acc_buffer.append(np.mean(train_acc_buffer_tmp))
-        scheduler.step(val_loss)
 
         if val_loss < val_loss_min:
             print('new minimum validation loss:', val_loss)
@@ -278,7 +268,7 @@ if __name__ == '__main__':
     device = 'cuda'
     batch_size = 64
     num_epochs = 5000
-    learning_rate = 0.001
+    learning_rate = 0.004
     os.makedirs('./logs/{}/'.format(exp_idx), exist_ok=True)
     os.makedirs('./checkpoints/{}/'.format(exp_idx), exist_ok=True)
 
