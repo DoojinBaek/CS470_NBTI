@@ -65,11 +65,11 @@ data_dir = "./"
 def create_datasets(batch_size):
 
     train_transform = transforms.Compose([
-    transforms.Grayscale(1),
-    transforms.RandomRotation([-30, 30], fill=0),
-    transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=0),
-    transforms.ToTensor()
-])
+        transforms.Grayscale(num_output_channels = 1),
+        transforms.RandomRotation([-30, 30], fill=0),
+        transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=0),
+        transforms.ToTensor()
+    ])
 
     # choose the training and test datasets
     train_data = datasets.ImageFolder(os.path.join(data_dir, 'data/Images/Images/'), train_transform)
@@ -92,13 +92,17 @@ def create_datasets(batch_size):
     train_loader = torch.utils.data.DataLoader(train_data,
                                                batch_size=batch_size,
                                                sampler=train_sampler,
-                                               num_workers=4)
+                                               num_workers = 4,
+                                               drop_last = True
+                                               )
 
     # load validation data in batches
     valid_loader = torch.utils.data.DataLoader(train_data,
                                                batch_size=batch_size,
                                                sampler=valid_sampler,
-                                               num_workers=4)
+                                               num_workers = 4,
+                                               drop_last = True
+                                               )
 
     return train_data, train_loader, valid_loader
 
@@ -116,30 +120,36 @@ class Classifier_CNN(torch.nn.Module):
     def __init__(self):
         super(Classifier_CNN, self).__init__()
         self.layer1 = torch.nn.Sequential(
-            torch.nn.Conv2d(1, 16, kernel_size = 4),
+            torch.nn.Conv2d(1, 16, kernel_size=3),
             torch.nn.BatchNorm2d(16),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
+            torch.nn.Dropout2d(0.1),
             torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer2 = torch.nn.Sequential(
             torch.nn.Conv2d(16, 32, kernel_size=3),
             torch.nn.BatchNorm2d(32),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
+            torch.nn.Dropout2d(0.1),
             torch.nn.MaxPool2d(kernel_size=2)
         )
         self.layer3 = torch.nn.Sequential(
             torch.nn.Conv2d(32, 64, kernel_size=3),
             torch.nn.BatchNorm2d(64),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
+            torch.nn.Dropout2d(0.1),
         )
         self.layer4 = torch.nn.Sequential(
             torch.nn.Conv2d(64, 128, kernel_size=2),
             torch.nn.BatchNorm2d(128),
             torch.nn.SiLU(),
-            torch.nn.Dropout2d(0.2),
+            torch.nn.Dropout2d(0.1),
+        )
+        self.layer5 = torch.nn.Sequential(
+            torch.nn.Conv2d(128, 256, kernel_size=2),
+            torch.nn.BatchNorm2d(128),
+            torch.nn.SiLU(),
+            torch.nn.Dropout2d(0.1),
         )
         self.linear_layer = torch.nn.Sequential(
             torch.nn.Linear(1152, 512),
@@ -151,11 +161,13 @@ class Classifier_CNN(torch.nn.Module):
             torch.nn.Linear(256, 128),
             torch.nn.BatchNorm1d(128),
             torch.nn.SiLU(),
-            torch.nn.Linear(128, 52)
+            torch.nn.Linear(128, 64),
+            torch.nn.BatchNorm1d(64),
+            torch.nn.SiLU(),
+            torch.nn.Linear(64, 26)
         )
     
     def forward(self, x):
-
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
@@ -263,7 +275,7 @@ def logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, tra
 if __name__ == '__main__':
     
     device = 'cuda'
-    batch_size = 32
+    batch_size = 256
     num_epochs = 100
     learning_rate = 0.01
     os.makedirs('./logs/{}/'.format(exp_idx), exist_ok=True)
