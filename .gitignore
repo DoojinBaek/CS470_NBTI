@@ -2,3 +2,4 @@ output/
 data/
 checkpoints/
 logs/
+wandb/

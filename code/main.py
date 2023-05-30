@@ -1,5 +1,7 @@
 from typing import Mapping
+import matplotlib.pyplot as plt
 import os
+import numpy as np
 from tqdm import tqdm
 from easydict import EasyDict as edict
 import matplotlib.pyplot as plt
@@ -7,7 +9,7 @@ import torch
 from torch.optim.lr_scheduler import LambdaLR
 import pydiffvg
 import save_svg
-from losses import SDSLoss, ToneLoss, ConformalLoss
+from losses import SDSLoss, ToneLoss, ConformalLoss, EmbeddingLoss
 from config import set_config
 from utils import (
     check_and_create_dir,
@@ -95,6 +97,11 @@ if __name__ == "__main__":
 
     if cfg.loss.conformal.use_conformal_loss:
         conformal_loss = ConformalLoss(parameters, device, cfg.optimized_letter, shape_groups)
+        
+    if cfg.loss.embedding.use_embedding_loss:
+        embedding_loss = EmbeddingLoss(device)
+        img = img_init.permute(2, 0, 1)
+        embedding_loss.set_image_init(img)
 
     lr_lambda = lambda step: learning_rate_decay(step, cfg.lr.lr_init, cfg.lr.lr_final, num_iter,
                                                  lr_delay_steps=cfg.lr.lr_delay_steps,
@@ -104,6 +111,8 @@ if __name__ == "__main__":
 
     print("start training")
     # training loop
+    eloss = []
+    sloss = []
     t_range = tqdm(range(num_iter))
     for step in t_range:
         if cfg.use_wandb:
@@ -151,6 +160,14 @@ if __name__ == "__main__":
             if cfg.use_wandb:
                 wandb.log({"loss_angles": loss_angles}, step=step)
             loss = loss + loss_angles
+    
+        if cfg.loss.embedding.use_embedding_loss:
+            img_permuted = img.permute(2, 0, 1)
+            embedding_loss.set_image_trans(img_permuted)
+            el = embedding_loss() / 1000
+            if cfg.use_wandb:
+                wandb.log({"embedding_loss": el}, step=step)
+            loss = loss + el
 
         t_range.set_postfix({'loss': loss.item()})
         loss.backward()
@@ -164,7 +181,19 @@ if __name__ == "__main__":
         filename, w, h, shapes, shape_groups)
 
     combine_word(cfg.word, cfg.optimized_letter, cfg.font, cfg.experiment_dir)
-
+    
+    # plot the losses
+    eloss_np = np.array(eloss)
+    np.save('./eloss_np.npy', eloss_np)
+    plt.plot(eloss, label = 'Embedding Loss', color='red')
+    plt.plot(sloss, label = 'SDS Loss', color='blue')
+    plt.plot([eloss[i] + sloss[i] for i in range(len(eloss))], label = 'Total Loss', color='black')
+    plt.legend()
+    plt.xlabel('Step')
+    plt.ylabel('Loss')
+    plt.savefig('./Loss.png')
+    plt.close()
+    
     if cfg.save.image:
         filename = os.path.join(
             cfg.experiment_dir, "output-png", "output.png")
