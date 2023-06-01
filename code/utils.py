@@ -69,6 +69,7 @@ def preprocess(font, word, letter, level_of_cc=1, font_path=None, init_path=None
                      "u": 100, "v": 100, "w": 100, "x": 130,
                      "y": 120, "z": 120
                      }
+        level_of_cc = level_of_cc * 1
         target_cp = {k: v * level_of_cc for k, v in target_cp.items()}
 
     print(f"======= {font} =======")
