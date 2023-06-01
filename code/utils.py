@@ -9,7 +9,11 @@ import cv2
 from ttf import font_string_to_svgs, normalize_letter_size
 import torch
 import numpy as np
+from typing import Final
+import glob
 
+font_list: Final = ("Bell-MT", "DeliusUnicase-Regular", "HobeauxRococeaux-Sherman", "IndieFlower-Regular"
+                    ,"JosefinSans-Light", "KaushanScript-Regular", "LuckiestGuy-Regular", "Noteworthy-Bold", "Quicksand", "Saira-Regular")
 
 def edict_2_dict(x):
     if isinstance(x, dict):
@@ -44,7 +48,7 @@ def update(d, u):
     return d
 
 
-def preprocess(font, word, letter, level_of_cc=1):
+def preprocess(font, word, letter, level_of_cc=1, font_path=None, init_path=None):
 
     if level_of_cc == 0:
         target_cp = None
@@ -68,8 +72,8 @@ def preprocess(font, word, letter, level_of_cc=1):
         target_cp = {k: v * level_of_cc for k, v in target_cp.items()}
 
     print(f"======= {font} =======")
-    font_path = f"code/data/fonts/{font}.ttf"
-    init_path = f"code/data/init"
+    if(font_path == None): font_path = f"code/data/fonts/{font}.ttf"
+    if(init_path == None): init_path = f"code/data/init"
     subdivision_thresh = None
     font_string_to_svgs(init_path, font_path, word, target_control=target_cp,
                         subdivision_thresh=subdivision_thresh)
@@ -220,3 +224,35 @@ def create_video(num_iter, experiment_dir, video_frame_freq):
     for iii in range(len(img_array)):
         out.write(img_array[iii])
     out.release()
+
+def range_char(start, stop):
+    return (chr(n) for n in range(ord(start), ord(stop) + 1))
+
+def letter_to_png(font_path, font, letter):
+    init_path = f"code/data/letter_classifier/{letter}"
+    if not (os.path.isdir(init_path)): os.mkdir(init_path)
+    font_string_to_svgs(init_path, font_path, letter)
+    normalize_letter_size(init_path, font_path, letter)
+    svg_result = init_path + f"/{font}_{letter}_scaled.svg"
+    canvas_width, canvas_height, shapes, shape_groups = pydiffvg.svg_to_scene(svg_result)
+    render = pydiffvg.RenderFunction.apply
+    scene_args = pydiffvg.RenderFunction.serialize_scene(canvas_width, canvas_height, shapes, shape_groups)
+    img = render(canvas_width, canvas_height, 2, 2, 0, None, *scene_args)
+    img = img[:, :, 3:4] * img[:, :, :3] + \
+        torch.ones(img.shape[0], img.shape[1], 3, device="cuda:0") * (1 - img[:, :, 3:4])
+    img = img[:, :, :3]
+    save_image(img, f"{init_path}/{font}_{letter}.png")
+
+def encoder_train_image_gen(w, h):
+    for font in font_list:
+        font_path = f"code/data/fonts/{font}.ttf"
+        for letter in range_char('A', 'Z'):
+            letter_to_png(font_path, font, letter)
+        for letter in range_char('a', 'z'):
+            letter_to_png(font_path, font, letter)
+    fileList = glob.glob("code/data/letter_classifier/**/*.svg", recursive=True)
+    for filePath in fileList:
+        try:
+            os.remove(filePath)
+        except OSError:
+            print("Failed to remove: ", filePath)

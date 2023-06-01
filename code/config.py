@@ -42,6 +42,7 @@ def parse_args():
     parser.add_argument('--wandb_user', type=str, default="none")
     parser.add_argument('--abstract', type=str2bool, default=False, help="whether abstract or not")
     parser.add_argument('--memo', type=str, default="", help="memo on directory name")
+    parser.add_argument('--gen_data', type=bool, default=False, help="generate default data for letter encoder")
 
     cfg = edict()
     args = parser.parse_args()
@@ -73,6 +74,7 @@ def parse_args():
     else:
         cfg.log_dir = f"{args.log_dir}/{int(time.time())}C.word-{cfg.word}_sem-{cfg.semantic_concept}_letter-{cfg.optimized_letter}_seed-{cfg.seed}_font-{cfg.font}_{cfg.memo}"
 
+    cfg.gen_data = args.gen_data
 
     return cfg
 

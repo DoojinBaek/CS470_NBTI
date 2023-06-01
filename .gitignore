@@ -2,3 +2,6 @@ output/
 data/
 TOKEN
 .env
+checkpoints/
+logs/
+wandb/
