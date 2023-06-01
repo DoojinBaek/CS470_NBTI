@@ -11,9 +11,19 @@ from utils import (
     update)
 import wandb
 import warnings
+from abstract_to_concrete import abstract_to_concrete
 import time
 warnings.filterwarnings("ignore")
 
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -30,6 +40,8 @@ def parse_args():
     parser.add_argument('--batch_size', type=int, default=1)
     parser.add_argument('--use_wandb', type=int, default=0)
     parser.add_argument('--wandb_user', type=str, default="none")
+    parser.add_argument('--abstract', type=str2bool, default=False, help="whether abstract or not")
+    parser.add_argument('--memo', type=str, default="", help="memo on directory name")
     parser.add_argument('--gen_data', type=bool, default=False, help="generate default data for letter encoder")
 
     cfg = edict()
@@ -55,14 +67,38 @@ def parse_args():
     cfg.wandb_user = args.wandb_user
     cfg.letter = f"{args.font}_{args.optimized_letter}_scaled"
     cfg.target = f"code/data/init/{cfg.letter}"
-    cfg.log_dir = f"{args.log_dir}/{int(time.time())}.word-{cfg.word}_sem-{cfg.semantic_concept}_letter-{cfg.optimized_letter}_seed-{cfg.seed}_font-{cfg.font}"
+    cfg.abstract = args.abstract
+    cfg.memo = args.memo
+    if cfg.abstract == True:
+        cfg.log_dir = f"{args.log_dir}/{int(time.time())}A.word-{cfg.word}_sem-{cfg.semantic_concept}_con-{{}}_letter-{cfg.optimized_letter}_seed-{cfg.seed}_font-{cfg.font}_{cfg.memo}"
+    else:
+        cfg.log_dir = f"{args.log_dir}/{int(time.time())}C.word-{cfg.word}_sem-{cfg.semantic_concept}_letter-{cfg.optimized_letter}_seed-{cfg.seed}_font-{cfg.font}_{cfg.memo}"
+
     cfg.gen_data = args.gen_data
+
     return cfg
 
 
 def set_config():
 
     cfg_arg = parse_args()
+
+    # abstract semantic concept to concrete one
+    if (cfg_arg.abstract == True):
+        while True:
+            try:
+                cfg_arg.semantic_concept = abstract_to_concrete(cfg_arg.semantic_concept)
+                break
+            except:
+                print('retrying...')
+                time.sleep(10)
+        print("converted semantic concept")
+        print(cfg_arg.semantic_concept)
+        cfg_arg.log_dir = cfg_arg.log_dir.format(cfg_arg.semantic_concept)
+    
+    cfg_arg.caption = cfg_arg.caption.format(cfg_arg.semantic_concept)
+
+
     with open(cfg_arg.config, 'r') as f:
         cfg_full = yaml.load(f, Loader=yaml.FullLoader)
 
