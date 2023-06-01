@@ -1,6 +1,7 @@
 import collections.abc
 import os
 import os.path as osp
+from time import sleep
 from torch import nn
 import kornia.augmentation as K
 import pydiffvg
@@ -230,7 +231,8 @@ def range_char(start, stop):
 
 def letter_to_png(font_path, font, letter):
     init_path = f"code/data/letter_classifier/{letter}"
-    if not (os.path.isdir(init_path)): os.mkdir(init_path)
+    if not (os.path.isdir(init_path)):
+        os.mkdir(init_path)
     font_string_to_svgs(init_path, font_path, letter)
     normalize_letter_size(init_path, font_path, letter)
     svg_result = init_path + f"/{font}_{letter}_scaled.svg"

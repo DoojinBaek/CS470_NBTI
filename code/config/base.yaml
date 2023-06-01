@@ -29,6 +29,8 @@ baseline:
       use_tone_loss: false
     conformal:
       use_conformal_loss: false
+    embedding:
+      use_embedding_loss: false
 
 conformal_0.5_dist_pixel_100_kernel201:
   parent_config: baseline
@@ -42,5 +44,27 @@ conformal_0.5_dist_pixel_100_kernel201:
     conformal:
       use_conformal_loss: true
       angeles_w: 0.1
+    embedding:
+      use_embedding_loss: false
 
+embedding_loss:
+  parent_config: baseline
+  level_of_cc: 1
+  loss:
+    tone:
+      use_tone_loss: false
+    conformal:
+      use_conformal_loss: false
+    embedding:
+      use_embedding_loss: true
 
+off_losses:
+  parent_config: baseline
+  level_of_cc: 1
+  loss:
+    tone:
+      use_tone_loss: false
+    conformal:
+      use_conformal_loss: false
+    embedding:
+      use_embedding_loss: false

@@ -10,6 +10,8 @@ from shapely.geometry.polygon import Polygon
 
 from diffusers import StableDiffusionPipeline
 
+from letter_classifier import Classifier_CNN
+
 class SDSLoss(nn.Module):
     def __init__(self, cfg, device):
         super(SDSLoss, self).__init__()
@@ -173,6 +175,39 @@ class ConformalLoss:
             loss_angles += (nnf.mse_loss(angles[i], self.angles[i]))
         return loss_angles
 
-
-
-
+class EmbeddingLoss:
+    def __init__(self, device):
+        self.loss_fn = torch.nn.MSELoss()
+        self.softmax = torch.nn.Softmax()
+        self.original_image_embedding = None
+        self.transformed_image = None
+        self.device = device
+        self.model = Classifier_CNN().to(device)
+        checkpoint = torch.load("code/max_val_acc_checkpoint.pt")
+        self.model.load_state_dict(checkpoint)
+        for param in self.model.parameters():
+            param.requires_grad_(False)
+        self.model.eval()
+        self.original_image_32 = None
+        self.transformed_iamge_32 = None
+        
+    def image_transform(self, img):
+        pilimg = torchvision.transforms.functional.to_pil_image(img)
+        grayscale = torchvision.transforms.functional.to_grayscale(pilimg)
+        grayscale = torchvision.transforms.functional.pil_to_tensor(grayscale).type(torch.FloatTensor)
+        resized = torchvision.transforms.functional.resize(grayscale, size = [32, 32])
+        resized = resized.unsqueeze(0)
+        return resized.to(self.device)
+    def set_image_init(self, img):
+        transformed = self.image_transform(img)
+        self.original_image_32 = transformed
+        # self.original_image_embedding = self.model(transformed).cpu().numpy().reshape(-1)
+        self.original_image_embedding = (self.model(transformed))
+    def set_image_trans(self, img):
+        transformed = self.image_transform(img)
+        self.transformed_iamge_32 = transformed
+        self.transformed_image = transformed
+    def __call__(self):
+        # transformed_image_embedding = self.model(self.transformed_image).cpu().numpy().reshape(-1)
+        transformed_image_embedding = (self.model(self.transformed_image))
+        return +self.loss_fn(self.original_image_embedding, transformed_image_embedding)
