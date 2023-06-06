@@ -56,7 +56,7 @@ def parse_args():
     cfg.word = cfg.semantic_concept if args.word == "none" else args.word
     if " " in cfg.word:
       raise ValueError(f'no spaces are allowed')
-    cfg.caption = f"a {args.semantic_concept}. {args.prompt_suffix}"
+    cfg.caption = f"a {{}}. {args.prompt_suffix}"
     if args.optimized_letter in cfg.word:
         cfg.optimized_letter = args.optimized_letter
     else:
@@ -97,7 +97,6 @@ def set_config():
         cfg_arg.log_dir = cfg_arg.log_dir.format(cfg_arg.semantic_concept)
     
     cfg_arg.caption = cfg_arg.caption.format(cfg_arg.semantic_concept)
-
 
     with open(cfg_arg.config, 'r') as f:
         cfg_full = yaml.load(f, Loader=yaml.FullLoader)
