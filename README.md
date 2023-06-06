@@ -6,9 +6,9 @@
 
 ## Team Member
 
-| **Name**       | **Student ID** |
-| :------------- | :------------- |
-| Doojin Baek    | 20190289       |
+| **Name**       | **Student ID** | ** github ** |
+| :------------- | :------------- | :------------|
+| Doojin Baek    | 20190289       | https://github.com/minggg012 |
 | Min Kim        | 20200072       |
 | Dongwoo Moon   | 20200220       |
 | Dongjae Lee    | 20200445       |
