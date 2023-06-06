@@ -1,7 +1,11 @@
-output/
+output*
+final_outputs*
+final_outputs/
 data/
 TOKEN
 .env
 checkpoints/
 logs/
 wandb/
+*.pyc
+

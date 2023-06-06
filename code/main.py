@@ -1,6 +1,7 @@
 from typing import Mapping
 import matplotlib.pyplot as plt
 import os
+import time
 import numpy as np
 from tqdm import tqdm
 from easydict import EasyDict as edict
@@ -113,6 +114,7 @@ if __name__ == "__main__":
     # training loop
     eloss = []
     sloss = []
+    start = time.time()
     t_range = tqdm(range(num_iter))
     for step in t_range:
         if cfg.use_wandb:
@@ -164,7 +166,7 @@ if __name__ == "__main__":
         if cfg.loss.embedding.use_embedding_loss:
             img_permuted = img.permute(2, 0, 1)
             embedding_loss.set_image_trans(img_permuted)
-            el = embedding_loss() / 1000
+            el = embedding_loss() / 1000000 #/ 1000 /2
             if cfg.use_wandb:
                 wandb.log({"embedding_loss": el}, step=step)
             loss = loss + el
@@ -173,7 +175,10 @@ if __name__ == "__main__":
         loss.backward()
         optim.step()
         scheduler.step()
-
+    
+    end = time.time()
+    
+    print('Time:', (end-start)/60)
     filename = os.path.join(
         cfg.experiment_dir, "output-svg", "output.svg")
     check_and_create_dir(filename)

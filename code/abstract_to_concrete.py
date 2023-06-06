@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 
 def abstract_to_concrete(abstract_word):
     load_dotenv()
-
-    openai.api_key = ""
+    # openai.api_key = "sk-"
+    openai.api_key = "sk-"
 
     response = openai.Completion.create(
         model="davinci:ft-personal-2023-05-11-15-22-42",
