@@ -2,7 +2,8 @@
 
 **CS470 Introduction to Artificial Intelligence TEAM 12**
 
-<img width="1500" alt="NBTI" src=/root/CS470_Final/typography.png>
+![typography](https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/9ba2b4cf-9676-415d-91aa-cd7ac7c60c56)
+
 
 | **Name**       | **Student ID** |
 | :------------- | :------------- |
@@ -13,14 +14,12 @@
 | Hanbee Jang    | 20200552       |
 
 ## Abstract
----
 
 We proposed an NN-based typography model NBTI that can visually represent letters, reflecting the meanings inherent in both concrete and formless words well.
 
 
 
 ## Run Experiments
----
 
 ```
 python code/main.py --experiment <experiment> --semantic_concept <concept> --optimized_letter <letter> --seed <seed> --font <font_name> --use_wandb <0/1> --wandb_user <user name> 
