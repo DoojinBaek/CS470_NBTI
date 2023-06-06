@@ -208,6 +208,5 @@ class EmbeddingLoss:
         self.transformed_iamge_32 = transformed
         self.transformed_image = transformed
     def __call__(self):
-        # transformed_image_embedding = self.model(self.transformed_image).cpu().numpy().reshape(-1)
         transformed_image_embedding = (self.model(self.transformed_image))
-        return +self.loss_fn(self.original_image_embedding, transformed_image_embedding)
+        return self.loss_fn(self.original_image_embedding, transformed_image_embedding)

@@ -65,9 +65,10 @@ data_dir = "./"
 def create_datasets(batch_size):
 
     train_transform = transforms.Compose([
-        transforms.Grayscale(num_output_channels = 1),
+        transforms.Resize(32),
+        transforms.ElasticTransform(),
         transforms.RandomRotation([-30, 30], fill=0),
-        transforms.RandomPerspective(distortion_scale=0.65, p=0.7, fill=0),
+        transforms.Grayscale(num_output_channels = 1),
         transforms.ToTensor()
     ])
 
@@ -92,7 +93,7 @@ def create_datasets(batch_size):
     train_loader = torch.utils.data.DataLoader(train_data,
                                                batch_size=batch_size,
                                                sampler=train_sampler,
-                                               num_workers = 4,
+                                               num_workers=4,
                                                drop_last = True
                                                )
 
@@ -100,7 +101,7 @@ def create_datasets(batch_size):
     valid_loader = torch.utils.data.DataLoader(train_data,
                                                batch_size=batch_size,
                                                sampler=valid_sampler,
-                                               num_workers = 4,
+                                               num_workers=4,
                                                drop_last = True
                                                )
 
@@ -238,10 +239,9 @@ def train(model, learning_rate, train_dataloader, valid_dataloader, device):
             val_acc_max = val_acc
             torch.save(model.state_dict(), "./checkpoints/{}/max_val_acc_chaekpoint.pt".format(exp_idx))
 
-        if (epoch+1)%100 == 0:
+        if (epoch+1)%10 == 0:
             torch.save(model.state_dict(), "./checkpoints/{}/epoch_{}.pt".format(exp_idx, epoch+1))
-        if (epoch+1)%30 == 0:
-            logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, train_acc_buffer)
+        logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, train_acc_buffer)
             
         done = time.time()
         print('Elapsed Time: {:.5f}'.format((done-start)/60))
@@ -275,9 +275,9 @@ def logging(exp_idx, valid_loss_buffer, train_loss_buffer, valid_acc_buffer, tra
 if __name__ == '__main__':
     
     device = 'cuda'
-    batch_size = 256
+    batch_size = 512
     num_epochs = 100
-    learning_rate = 0.01
+    learning_rate = 0.001
     os.makedirs('./logs/{}/'.format(exp_idx), exist_ok=True)
     os.makedirs('./checkpoints/{}/'.format(exp_idx), exist_ok=True)
 
