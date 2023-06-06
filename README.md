@@ -6,7 +6,7 @@
 
 ## Team Member
 
-| **Name**       | **Student ID** | ** github ** |
+| **Name**       | **Student ID** | **github** |
 | :------------- | :------------- | :------------|
 | Doojin Baek    | 20190289       | [DoojinBaek][doojin link] |
 | Min Kim        | 20200072       | [minggg012][minggg012 link] |
