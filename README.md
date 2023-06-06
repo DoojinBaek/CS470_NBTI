@@ -8,11 +8,17 @@
 
 | **Name**       | **Student ID** | ** github ** |
 | :------------- | :------------- | :------------|
-| Doojin Baek    | 20190289       | https://github.com/minggg012 |
-| Min Kim        | 20200072       |
-| Dongwoo Moon   | 20200220       |
-| Dongjae Lee    | 20200445       |
-| Hanbee Jang    | 20200552       |
+| Doojin Baek    | 20190289       | [DoojinBaek][doojin link] |
+| Min Kim        | 20200072       | [minggg012][minggg012 link] |
+| Dongwoo Moon   | 20200220       | [snaoyam][dongwoo link] |
+| Dongjae Lee    | 20200445       | [duncan020313][dongjae link] |
+| Hanbee Jang    | 20200552       | [janghanbee][janghanbee link] |
+
+[doojin link]: https://github.com/DoojinBaek
+[minggg012 link]: https://github.com/minggg012
+[dongwoo link]: https://github.com/snaoyam
+[dongjae link]: https://github.com/duncan020313
+[janghanbee link]: https://github.com/janghanbee
 
 ## Reference Paper
 [Word-As-Image for Semantic Typography (SIGGRAPH 2023)](https://github.com/Shiriluz/Word-As-Image/tree/main)
