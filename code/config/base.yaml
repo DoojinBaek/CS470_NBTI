@@ -3,7 +3,7 @@ baseline:
   save:
     init: true
     image: true
-    video: true
+    video: false
     video_frame_freq: 1
   trainable:
     point: true

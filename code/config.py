@@ -56,11 +56,13 @@ def parse_args():
     cfg.word = cfg.semantic_concept if args.word == "none" else args.word
     if " " in cfg.word:
       raise ValueError(f'no spaces are allowed')
+    cfg.word = (cfg.word).upper()
     cfg.caption = f"a {{}}. {args.prompt_suffix}"
     if args.optimized_letter in cfg.word:
         cfg.optimized_letter = args.optimized_letter
     else:
       raise ValueError(f'letter should be in word')
+    args.optimized_letter = (args.optimized_letter).upper()
     cfg.batch_size = args.batch_size
     cfg.token = args.token
     cfg.use_wandb = args.use_wandb
