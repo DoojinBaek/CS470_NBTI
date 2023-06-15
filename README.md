@@ -58,13 +58,7 @@ pip install kornia==0.6.8
 pip install wandb
 pip install shapely
 ```
-
-3. Install diffusers:
-```bash
-pip install diffusers==0.8
-pip install transformers scipy ftfy accelerate
-```
-4. Install diffvg:
+3. Install diffvg:
 ```bash
 git clone https://github.com/BachiLi/diffvg.git
 cd diffvg
@@ -72,7 +66,7 @@ git submodule update --init --recursive
 python setup.py install
 ```
 
-5. Paste your HuggingFace [access token](https://huggingface.co/settings/tokens) for StableDiffusion in the TOKEN file.
+4. Paste your HuggingFace [access token](https://huggingface.co/settings/tokens) for StableDiffusion in the TOKEN file.
 
 ## Run Experiments
 
