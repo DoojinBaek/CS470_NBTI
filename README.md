@@ -46,17 +46,8 @@ cd CS470_NBTI
 ```
 2. Create a new conda environment and install the libraries:
 ```bash
-conda create --name word python=3.8.15
-conda activate word
-pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
-conda install -y numpy scikit-image
-conda install -y -c anaconda cmake
-conda install -y -c conda-forge ffmpeg
-pip install svgwrite svgpathtools cssutils numba torch-tools scikit-fmm easydict visdom freetype-py shapely
-pip install opencv-python==4.5.4.60  
-pip install kornia==0.6.8
-pip install wandb
-pip install shapely
+conda env create -f word_env.yaml
+conda activate word_env
 ```
 3. Install diffvg:
 ```bash
@@ -65,7 +56,6 @@ cd diffvg
 git submodule update --init --recursive
 python setup.py install
 ```
-
 4. Paste your HuggingFace [access token](https://huggingface.co/settings/tokens) for StableDiffusion in the TOKEN file.
 
 ## Run Experiments
