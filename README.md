@@ -1,18 +1,19 @@
 # NBTI: NN-Based Typography incoprating semantics
 
-**CS470 Introduction to Artificial Intelligence TEAM 12**
+**CS470 Introduction to Artificial Intelligence TEAM P12**
 
-![typography](https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/9ba2b4cf-9676-415d-91aa-cd7ac7c60c56)
+![preview_img](https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/4afa0f8c-25b3-4012-83dc-5fea2ca0003c)
+
 
 ## Team Member
 
-| **Name**       | **Student ID** | **github** |
-| :------------- | :------------- | :------------|
-| Doojin Baek    | 20190289       | [DoojinBaek][doojin link] |
-| Min Kim        | 20200072       | [minggg012][minggg012 link] |
-| Dongwoo Moon   | 20200220       | [snaoyam][dongwoo link] |
-| Dongjae Lee    | 20200445       | [duncan020313][dongjae link] |
-| Hanbee Jang    | 20200552       | [janghanbee][janghanbee link] |
+| **Name**       | **Student ID** | **github**                     |
+| :------------- | :------------- | :----------------------------- |
+| Doojin Baek    | 20190289       | [DoojinBaek][doojin link]      |
+| Min Kim        | 20200072       | [minggg012][minggg012 link]    |
+| Dongwoo Moon   | 20200220       | [snaoyam][dongwoo link]        |
+| Dongjae Lee    | 20200445       | [duncan020313][dongjae link]   |
+| Hanbee Jang    | 20200552       | [janghanbee][janghanbee link]  |
 
 [doojin link]: https://github.com/DoojinBaek
 [minggg012 link]: https://github.com/minggg012
