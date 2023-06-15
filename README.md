@@ -111,7 +111,7 @@ python code/main.py  --semantic_concept "FANCY" --optimized_letter "Y" --font "K
 
 2. Concrete word: Applying our encoder only
 ```bash
-python code/main.py  --semantic_concept "FANCY" --optimized_letter "Y" --font "KaushanScript-Regular" --abstract "FALSE"
+python code/main.py  --semantic_concept "CAT" --optimized_letter "C" --font "Moonies" --abstract "FALSE"
 ```
 <br>
 <div align="center">
