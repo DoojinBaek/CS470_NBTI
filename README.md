@@ -91,7 +91,11 @@ Optional arguments:
 * ```--experiment``` : You can specify any experiment in the config file, default: conformal_0.5_dist_pixel_100_kernel201
 * ```--log_dir``` : Default: output folder
 * ```--prompt_suffix``` : Default: "minimal flat 2d vector. lineal color. trending on artstation"
+* ```--abstract``` : Whether the input semantic concept is abstract or not, default: False
 * ```--gen_data``` : Default: not generate. generates the data needed for the first learning.
+* ```--batch_size``` : Default: 1
+* ```--use_wandb``` : Default: 0
+* ```--wandb_user``` : Default: none
 
 
 ### Examples
