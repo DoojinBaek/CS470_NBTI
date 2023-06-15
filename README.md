@@ -61,6 +61,11 @@ cd CS470_NBTI
 conda env create -f word_env.yaml
 conda activate word
 ```
+3. Execute setup bash file
+```bash
+cd code/
+bash setup.sh
+```
 
 ## Run Experiments
 
