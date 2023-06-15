@@ -1,7 +1,9 @@
 #!/bin/bash
 source ~/anaconda3/etc/profile.d/conda.sh
 ## setting conda env
-conda env create -f test_env.yaml
+conda env create -f word_env.yaml
+pip install diffusers
+pip install --upgrade torch torchvision
 
 ## download dataset
 wget http://143.248.235.11:5000/fontsdataset/dataset.zip
@@ -25,5 +27,5 @@ bash ./code/finetuning/finetunemodel.sh
 experiment="embedding_loss"
 word="SOFT"
 letter="O"
-font="JellyChoco.ttf"
+font="JellyChoco"
 python ./code/main.py $ARGS --semantic_concept "${word}" --word "${word}" --font "${font}"  --optimized_letter "${letter}" --experiment "${experiment}" --abstract "True"
