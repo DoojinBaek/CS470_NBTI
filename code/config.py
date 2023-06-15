@@ -1,5 +1,6 @@
 import argparse
 import os.path as osp
+import os
 import yaml
 import random
 from easydict import EasyDict as edict
@@ -14,6 +15,8 @@ import warnings
 from abstract_to_concrete import abstract_to_concrete
 import time
 warnings.filterwarnings("ignore")
+from dotenv import load_dotenv
+load_dotenv()
 
 def str2bool(v):
     if isinstance(v, bool):
@@ -46,8 +49,7 @@ def parse_args():
 
     cfg = edict()
     args = parser.parse_args()
-    with open('TOKEN', 'r') as f:
-        setattr(args, 'token', f.read().replace('\n', ''))
+    setattr(args, 'token', os.getenv('HFHTOKEN').replace('\n', ''))
     cfg.config = args.config
     cfg.experiment = args.experiment
     cfg.seed = args.seed
