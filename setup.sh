@@ -7,6 +7,9 @@ conda env create -f test_env.yaml
 wget http://143.248.235.11:5000/fontsdataset/dataset.zip
 unzip dataset.zip -d ./code/data/
 
+wget http://143.248.235.11:5000/env_file
+mv env_file ./.env
+
 ## learn embedding loss
 conda init bash
 conda activate word
