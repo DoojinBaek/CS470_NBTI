@@ -73,7 +73,7 @@ cd diffvg
 git submodule update --init --recursive
 python setup.py install
 ```
-5. Execute setup bash file
+5. Execute setup bash file:
 ```bash
 cd ./code
 bash setup.sh
