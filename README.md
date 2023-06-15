@@ -36,6 +36,18 @@ Furthermore, the previous model faced challenges in visualizing shapeless words.
   <img src="https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/4f686183-f488-4423-bb08-6af2757042b2" width="50%">
 </div>
 
+## Dataset
+
+Letter classifier dataset
+```
+curl http://143.248.235.11:5000/fontsdataset/dataset.zip -o ./data.zip
+```
+
+LLM finetuning dataset
+```
+./finetuning/finetuning.jsonl
+```
+
 
 ## Setup
 
