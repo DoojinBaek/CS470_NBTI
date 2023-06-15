@@ -49,14 +49,7 @@ cd CS470_NBTI
 conda env create -f word_env.yaml
 conda activate word_env
 ```
-3. Install diffvg:
-```bash
-git clone https://github.com/BachiLi/diffvg.git
-cd diffvg
-git submodule update --init --recursive
-python setup.py install
-```
-4. Paste your HuggingFace [access token](https://huggingface.co/settings/tokens) for StableDiffusion in the TOKEN file.
+3. Paste your HuggingFace [access token](https://huggingface.co/settings/tokens) for StableDiffusion in the TOKEN file.
 
 ## Run Experiments
 
