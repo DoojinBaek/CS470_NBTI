@@ -61,7 +61,19 @@ cd CS470_NBTI
 conda env create -f word_env.yaml
 conda activate word
 ```
-3. Execute setup bash file
+3. Install diffusers:
+```bash
+pip install diffusers==0.8
+pip install transformers scipy ftfy accelerate
+```
+4. Install diffvg:
+```bash
+git clone https://github.com/BachiLi/diffvg.git
+cd diffvg
+git submodule update --init --recursive
+python setup.py install
+```
+5. Execute setup bash file
 ```bash
 cd ./code
 bash setup.sh
