@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
     print("preprocessing")
     if(cfg.gen_data): encoder_train_image_gen(cfg.render_size, cfg.render_size)
-    preprocess(cfg.font, cfg.word, cfg.optimized_letter, cfg.level_of_cc)
+    # preprocess(cfg.font, cfg.word, cfg.optimized_letter, cfg.level_of_cc)
 
     if cfg.loss.use_sds_loss:
         sds_loss = SDSLoss(cfg, device)
