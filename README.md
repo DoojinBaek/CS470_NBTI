@@ -63,7 +63,7 @@ conda activate word
 ```
 3. Execute setup bash file
 ```bash
-cd code/
+cd ./code
 bash setup.sh
 ```
 
