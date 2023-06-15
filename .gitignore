@@ -8,4 +8,4 @@ checkpoints/
 logs/
 wandb/
 *.pyc
-
+__pycache__/
