@@ -91,7 +91,7 @@ Optional arguments:
 * ```--experiment``` : You can specify any experiment in the config file, default: conformal_0.5_dist_pixel_100_kernel201
 * ```--log_dir``` : Default: output folder
 * ```--prompt_suffix``` : Default: "minimal flat 2d vector. lineal color. trending on artstation"
-* ```--abstract``` : Whether the input semantic concept is abstract or not, default: False
+* ```--abstract``` : Whether the input semantic concept is abstract(formless) or not, default: False
 * ```--gen_data``` : Default: not generate. generates the data needed for the first learning.
 * ```--batch_size``` : Default: 1
 * ```--use_wandb``` : Default: 0
@@ -99,7 +99,7 @@ Optional arguments:
 
 
 ### Examples
-1. Applying our encoder and concretizer
+1. Formless word: Applying our encoder and concretizer
 ```bash
 python code/main.py  --semantic_concept "FANCY" --optimized_letter "Y" --font "KaushanScript-Regular" --abstract "TRUE"
 ```
@@ -109,12 +109,13 @@ python code/main.py  --semantic_concept "FANCY" --optimized_letter "Y" --font "K
 </div>
 <br>
 
-2. Applying our encoder only
+2. Concrete word: Applying our encoder only
 ```bash
 python code/main.py  --semantic_concept "FANCY" --optimized_letter "Y" --font "KaushanScript-Regular" --abstract "FALSE"
 ```
 <br>
 <div align="center">
-  <img src="https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/df88eeee-44de-44e3-b665-76a5fa957c8a" width="25%">
+  <img src="https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/ba66a32e-5bbf-47ab-ae26-ab73407d66a5" width="25%">
 </div>
+
 
