@@ -59,7 +59,7 @@ cd CS470_NBTI
 2. Create a new conda environment and install the libraries:
 ```bash
 conda env create -f word_env.yaml
-conda activate word_env
+conda activate word
 ```
 
 ## Run Experiments
