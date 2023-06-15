@@ -36,6 +36,7 @@ Furthermore, the previous model faced challenges in visualizing shapeless words.
   <img src="https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/4f686183-f488-4423-bb08-6af2757042b2" width="50%">
 </div>
 
+
 ## Setup
 
 1. Clone the github repo:
@@ -45,9 +46,19 @@ cd CS470_NBTI
 ```
 2. Create a new conda environment and install the libraries:
 ```bash
-conda env create -f word_env.yaml
+conda create --name word python=3.8.15
 conda activate word
+pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
+conda install -y numpy scikit-image
+conda install -y -c anaconda cmake
+conda install -y -c conda-forge ffmpeg
+pip install svgwrite svgpathtools cssutils numba torch-tools scikit-fmm easydict visdom freetype-py shapely
+pip install opencv-python==4.5.4.60  
+pip install kornia==0.6.8
+pip install wandb
+pip install shapely
 ```
+
 3. Install diffusers:
 ```bash
 pip install diffusers==0.8
@@ -66,7 +77,7 @@ python setup.py install
 ## Run Experiments
 
 ```
-python code/main.py --experiment <experiment> --semantic_concept <concept> --optimized_letter <letter> --seed <seed> --font <font_name> --use_wandb <0/1> --wandb_user <user name> 
+python code/main.py --experiment <experiment> --semantic_concept <concept> --optimized_letter <letter> --seed <seed> --font <font_name> --abstract <True/False> --gen_data <True/False> --use_wandb <0/1> --wandb_user <user name> 
 ```
 
 
@@ -81,10 +92,8 @@ Optional arguments:
 * ```--log_dir``` : Default: output folder
 * ```--prompt_suffix``` : Default: "minimal flat 2d vector. lineal color. trending on artstation"
 * ```--abstract``` : Whether the input semantic concept is abstract(formless) or not, default: False
-* ```--gen_data``` : Default: not generate. generates the data needed for the first learning.
+* ```--gen_data``` : Generates the data needed for the first learning, default: False
 * ```--batch_size``` : Default: 1
-* ```--use_wandb``` : Default: 0
-* ```--wandb_user``` : Default: none
 
 
 ### Examples
@@ -106,5 +115,3 @@ python code/main.py  --semantic_concept "CAT" --optimized_letter "C" --font "Moo
 <div align="center">
   <img src="https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/ba66a32e-5bbf-47ab-ae26-ab73407d66a5" width="25%">
 </div>
-
-
