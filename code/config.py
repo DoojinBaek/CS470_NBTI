@@ -49,7 +49,7 @@ def parse_args():
 
     cfg = edict()
     args = parser.parse_args()
-    setattr(args, 'token', os.getenv('HFHTOKEN').replace('\n', ''))
+    setattr(args, 'token', os.getenv('HFH_TOKEN').replace('\n', ''))
     cfg.config = args.config
     cfg.experiment = args.experiment
     cfg.seed = args.seed

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 def abstract_to_concrete(abstract_word):
     load_dotenv()
-    openai.api_key = os.getenv('OPENAITOKEN')
+    openai.api_key = os.getenv('OPENAI_API_KEY')
     response = openai.Completion.create(
         model="davinci:ft-personal-2023-05-11-15-22-42",
         prompt = f"Q: What is the symbol often used to represent the word '{abstract_word}'? Give me one word.\nA:",
