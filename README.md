@@ -36,7 +36,6 @@ Furthermore, the previous model faced challenges in visualizing shapeless words.
   <img src="https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/4f686183-f488-4423-bb08-6af2757042b2" width="50%">
 </div>
 
-
 ## Setup
 
 1. Clone the github repo:
@@ -46,19 +45,9 @@ cd CS470_NBTI
 ```
 2. Create a new conda environment and install the libraries:
 ```bash
-conda create --name word python=3.8.15
+conda env create -f word_env.yaml
 conda activate word
-pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
-conda install -y numpy scikit-image
-conda install -y -c anaconda cmake
-conda install -y -c conda-forge ffmpeg
-pip install svgwrite svgpathtools cssutils numba torch-tools scikit-fmm easydict visdom freetype-py shapely
-pip install opencv-python==4.5.4.60  
-pip install kornia==0.6.8
-pip install wandb
-pip install shapely
 ```
-
 3. Install diffusers:
 ```bash
 pip install diffusers==0.8
