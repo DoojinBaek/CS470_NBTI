@@ -2,8 +2,7 @@
 
 **CS470 Introduction to Artificial Intelligence TEAM P12**
 
-![preview_img](https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/4afa0f8c-25b3-4012-83dc-5fea2ca0003c)
-
+![preview_img](https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/d671f9de-7176-46d5-af50-3d736ff96a10)
 
 ## Team Member
 
@@ -33,8 +32,9 @@ Furthermore, the previous model faced challenges in visualizing shapeless words.
 ## Model Structure
 
 <div align="center">
-  <img src="https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/4f686183-f488-4423-bb08-6af2757042b2" width="50%">
+  <img src="https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/c4d7993e-ede4-4618-ae3b-592772f1b9cc" width="50%">
 </div>
+
 
 ## Dataset
 
@@ -96,8 +96,9 @@ python code/main.py  --semantic_concept "FANCY" --optimized_letter "Y" --font "K
 ```
 <br>
 <div align="center">
-    <img src="https://github.com/DoojinBaek/CS470_Word_As_Image/assets/104518532/c01ca0ed-9f4f-4fa2-b9d5-d83bef37dc4c" width="25%">
+    <img src="https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/da400674-f354-4e12-b2cd-8f2d77070bd7" width="25%">
 </div>
+
 <br>
 
 2. Concrete word: Applying our encoder only
@@ -106,5 +107,7 @@ python code/main.py  --semantic_concept "CAT" --optimized_letter "C" --font "Moo
 ```
 <br>
 <div align="center">
-  <img src="https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/ba66a32e-5bbf-47ab-ae26-ab73407d66a5" width="25%">
+  <img src="https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/6cd8a23f-c251-450d-94c7-f4933fd6d552" width="25%">
 </div>
+
+
