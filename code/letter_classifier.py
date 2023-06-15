@@ -21,7 +21,7 @@ import sys
 
 exp_idx = sys.argv[1]
 
-if len(sys.argv) != 2:
+if len(sys.argv) != 3:
     exp_idx = 999
 
 ########## helper functions ##########
@@ -73,7 +73,7 @@ def create_datasets(batch_size):
     ])
 
     # choose the training and test datasets
-    train_data = datasets.ImageFolder(os.path.join(data_dir, 'data/Images/Images/'), train_transform)
+    train_data = datasets.ImageFolder(os.path.join(data_dir, 'code/data/Images/Images/'), train_transform)
 
     # trainning set 중 validation 데이터로 사용할 비율
     valid_size = 0.2
@@ -276,7 +276,7 @@ if __name__ == '__main__':
     
     device = 'cuda'
     batch_size = 512
-    num_epochs = 100
+    num_epochs = int(sys.argv[2])
     learning_rate = 0.001
     os.makedirs('./logs/{}/'.format(exp_idx), exist_ok=True)
     os.makedirs('./checkpoints/{}/'.format(exp_idx), exist_ok=True)
