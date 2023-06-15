@@ -61,7 +61,6 @@ cd CS470_NBTI
 conda env create -f word_env.yaml
 conda activate word_env
 ```
-3. Paste your HuggingFace [access token](https://huggingface.co/settings/tokens) for StableDiffusion in the TOKEN file.
 
 ## Run Experiments
 
