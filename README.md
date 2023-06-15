@@ -41,8 +41,8 @@ Furthermore, the previous model faced challenges in visualizing shapeless words.
 
 1. Clone the github repo:
 ```bash
-git clone https://github.com/DoojinBaek/CS470_Word_As_Image
-cd CS470_Word_As_Image
+git clone https://github.com/DoojinBaek/CS470_NBTI
+cd CS470_NBTI
 ```
 2. Create a new conda environment and install the libraries:
 ```bash
