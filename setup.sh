@@ -24,10 +24,3 @@ cp ./logs/0/max_val_acc_checkpoint.pt .code/max_val_acc_checkpoint.pt
 ## Fine tuning GPT-3.5
 # uncomment below to do finetuning
 # bash ./code/finetuning/finetunemodel.sh
-
-## Start
-experiment="embedding_loss"
-word="SOFT"
-letter="O"
-font="JellyChoco"
-python ./code/main.py $ARGS --semantic_concept "${word}" --word "${word}" --font "${font}"  --optimized_letter "${letter}" --experiment "${experiment}" --abstract "True"
