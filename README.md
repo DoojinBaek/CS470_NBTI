@@ -75,7 +75,6 @@ python setup.py install
 ```
 5. Execute setup bash file:
 ```bash
-cd ./code
 bash setup.sh
 ```
 
