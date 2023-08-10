@@ -1,6 +1,8 @@
 # NBTI: NN-Based Typography Incoprating Semantics
 
-**CS470 Introduction to Artificial Intelligence TEAM P12**
+**CS470 Introduction to Artificial Intelligence TEAM P12** \
+[NN-Based Typography Incorporating semantics.pdf](NN-Based%20Typography%20Incorporating%20semantics.pdf)
+
 
 ![preview_img](https://github.com/DoojinBaek/CS470_NBTI/assets/104518532/d671f9de-7176-46d5-af50-3d736ff96a10)
 
